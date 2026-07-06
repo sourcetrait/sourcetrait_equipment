@@ -1,0 +1,14 @@
+[workspace]
+resolver = "3"
+members = [
+  "crates/sourcetrait_equipment",
+]
+
+[workspace.dependencies]
+pretty_assertions = { version = "1" }
+semver = { version = "1" }
+serde = { version = "1", features = ["derive"] }
+snafu = "0.8"
+sourcetrait_testing = { version = "4" }
+spdx = { version = "0.13" }
+toml = { version = "0.8" }
