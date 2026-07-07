@@ -1,14 +1,20 @@
 pub(crate) mod check;
 pub(crate) mod error;
 pub(crate) mod model {
-    pub(crate) mod common;
-    pub(crate) mod library;
-    pub(crate) mod rig;
+    pub(crate) mod imp {
+        pub(crate) mod common;
+    }
     pub(crate) mod toml {
+        pub(crate) mod imp {
+            pub(crate) mod library;
+        }
         pub(crate) mod common;
         pub(crate) mod library;
         pub(crate) mod rig;
     }
+    pub(crate) mod common;
+    pub(crate) mod library;
+    pub(crate) mod rig;
 }
 
 pub use crate::{
@@ -16,7 +22,7 @@ pub use crate::{
     error::{EquipmentError, EquipmentResult, IoErr, StrErr},
     model::{
         common::{
-            Key, Title, Description, Provider, License, Author, Version,
+            Key, Title, Details, Provider, License, Author, Version,
             LibraryName, GitHubProvider, Email, Summary, Keyword, Spdx,
             VersionReq,
         },

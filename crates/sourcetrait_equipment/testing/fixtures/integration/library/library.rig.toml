@@ -1,11 +1,8 @@
 name = "empower"
-title = "Empower"
+title = "SourceTrait Empower"
 version = "0.0.0-4"
 
-[nushell]
-version = "0.113.1"
-
-[description]
+[details]
 summary = "Empower platform library"
 keywords = ["ai"]
 
@@ -18,10 +15,7 @@ email = "development@sourcetrait.com"
 spdx = "AGPL-3.0-or-later"
 file = "LICENSE-AGPL-3.txt"
 
-[provider]
-name = "github"
-
 [imports]
 libraries = [
-    { name = "equip", author = "sourcetrait", version = "0", provider = "github" }
+    "sourcetrait/equipment"
 ]

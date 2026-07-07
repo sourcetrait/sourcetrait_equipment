@@ -7,7 +7,7 @@ pub struct Library {
     pub version: Version,
     pub author: Author,
     pub provider: Provider,
-    pub description: Description,
+    pub description: Details,
     pub license: License,
     pub imports: LibraryImports,
 }
@@ -36,7 +36,7 @@ impl TryFrom<LibraryToml> for Library {
             version: Version::try_from(v.version)?,
             author: Author::try_from(v.author)?,
             provider: Provider::try_from(v.provider)?,
-            description: Description::try_from(v.description)?,
+            description: Details::try_from(v.description)?,
             license: License::try_from(v.license)?, 
             imports: LibraryImports::try_from(v.imports)?,
         })

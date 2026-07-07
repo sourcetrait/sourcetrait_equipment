@@ -23,7 +23,7 @@ fn test_read() {
             title: equipment::Title::from("SourceTrait"),
             email: equipment::Email::from("development@sourcetrait.com"),
         },
-        description: equipment::Description {
+        description: equipment::Details {
             summary: equipment::Summary::from("Empower platform library"),
             keywords: Vec::from([
                 equipment::Keyword::from("ai"),

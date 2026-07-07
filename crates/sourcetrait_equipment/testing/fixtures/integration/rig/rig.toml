@@ -1,16 +1,17 @@
 name = "empower"
-title = "Empower"
+title = "SourceTrait Empower"
 version = "0.0.0-2"
 
-[nushell]
-version = "0.113.1"
+[supports]
+nushell.version = "0.113.1"
+equipment.version = "0"
 
 [author]
 name = "sourcetrait"
 title = "SourceTrait"
 email = "development@sourcetrait.com"
 
-[description]
+[details]
 summary = "Empower rig"
 keywords = ["ai"]
 
@@ -20,14 +21,36 @@ file = "LICENSE-AGPL-3.txt"
 
 [provider]
 name = "github"
+account = "sourcetrait"
+mirror.uri = "https://github.com/sourcetrait"
+contribute.uri = "git@github.com:sourcetrait"
 
 [exports]
 libraries = [
-    "ant",
-    "drone",
-    "equip",
-    "empower",
-    "fae",
-    "queen"
+    "sourcetrait/ant",
+    "sourcetrait/drone",
+    "sourcetrait/equip",
+    "sourcetrait/empower",
+    "sourcetrait/fae",
+    "sourcetrait/queen"
 ]
+
+[[imports.provider]]
+name = "github/sourcetrait"
+provider = "github"
+account = "sourcetrait"
+mirror.uri = "https://github.com/sourcetrait"
+contribute.uri = "git@github.com:sourcetrait"
+
+[[imports.rig]]
+name = "sourcetrait/equipment"
+provider.name = "github/sourcetrait"
+provider.mirror.path = "equip.git"
+provider.contribute.path = "equip.git"
+provider.reference = "dev"
+
+[[imports.library]]
+rig = "sourcetrait/equipment"
+library = "sourcetrait/equipment"
+version = "0"
 
