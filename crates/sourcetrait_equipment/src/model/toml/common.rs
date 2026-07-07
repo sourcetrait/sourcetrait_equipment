@@ -23,3 +23,4 @@ pub struct TomlLicense {
 pub struct TomlProvider {
     pub name: String,
 }
+

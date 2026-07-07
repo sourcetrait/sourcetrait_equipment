@@ -38,6 +38,9 @@ pub struct License {
 pub struct Version(pub semver::Version);
 
 #[derive(Debug, Clone, PartialEq, Eq)]
+pub struct VersionReq(pub semver::VersionReq);
+
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Provider {
     GitHub(GitHubProvider),
     Some(String),
@@ -79,6 +82,7 @@ impl Key {
 
 impl From<&str> for Key { fn from(v: &str) -> Self { Self(v.to_string()) } }
 impl From<&str> for Title { fn from(v: &str) -> Self { Self(v.to_string()) } }
+
 impl From<&str> for Version {
     fn from(v: &str) -> Self {
         Self(semver::Version::parse(v).expect("semver"))
@@ -109,6 +113,21 @@ impl TryFrom<String> for Version {
         semver::Version::parse(&ver)
             .map(|v| Version(v))
             .map_err(|source| EquipmentError::SemVer { source, ver })
+    }
+}
+
+impl TryFrom<String> for VersionReq {
+    type Error = EquipmentError;
+    fn try_from(ver: String) -> EquipmentResult<Self> {
+        semver::VersionReq::parse(&ver)
+            .map(|v| VersionReq(v))
+            .map_err(|source| EquipmentError::SemVer { source, ver })
+    }
+}
+
+impl From<&str> for VersionReq {
+    fn from(ver: &str) -> Self {
+        Self(semver::VersionReq::parse(&ver).expect("valid"))
     }
 }
 

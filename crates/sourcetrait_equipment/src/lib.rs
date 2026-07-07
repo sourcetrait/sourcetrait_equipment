@@ -2,6 +2,7 @@ pub(crate) mod check;
 pub(crate) mod error;
 pub(crate) mod model {
     pub(crate) mod common;
+    pub(crate) mod library;
     pub(crate) mod rig;
     pub(crate) mod toml {
         pub(crate) mod common;
@@ -17,6 +18,10 @@ pub use crate::{
         common::{
             Key, Title, Description, Provider, License, Author, Version,
             LibraryName, GitHubProvider, Email, Summary, Keyword, Spdx,
+            VersionReq,
+        },
+        library::{
+            Library, LibraryImports, LibraryImport,
         },
         rig::{
             Rig, RigExports, RigNushell,
@@ -26,7 +31,7 @@ pub use crate::{
                 TomlAuthor, TomlProvider, TomlDescription, TomlLicense,
             },
             library::{
-                LibraryToml, LibraryTomlDependency,
+                LibraryToml, LibraryTomlImports, LibraryTomlImport,
             },
             rig::{
                 RigToml, RigTomlNushell, RigTomlExports,
@@ -39,5 +44,4 @@ pub(crate) use std::{
     io,
     fs,
     path::{Path,PathBuf},
-    collections::HashMap,
 };
