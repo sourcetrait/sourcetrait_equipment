@@ -1,3 +1,6 @@
+pub(crate) mod generated {
+    pub(crate) mod ai;
+}
 pub(crate) mod check;
 pub(crate) mod error;
 pub(crate) mod model {
@@ -20,34 +23,44 @@ pub(crate) mod model {
 }
 
 pub use crate::{
-    check::{StrCase, StrCheck},
-    error::{EquipmentError, EquipmentResult, IoErr, StrErr},
     model::{
         common::{
             Key, BiKey, Title, Details, Provider, License, Author, Version,
-            LibraryName, Email, Summary, Keyword, Spdx,
-            VersionReq, ProviderAccount, ProviderContribute, ProviderMirror,
+            Email, Summary, Keyword, Spdx, SupportVersionReq,
+            VersionReq, ProviderContribute, ProviderMirror,
             ProviderReference, ProviderUri,
         },
         library::{
             Library, LibraryImports, LibraryImport,
         },
         rig::{
-            Rig, RigExports, RigNushell,
+            Rig, RigExports, RigSupport,
         },
         toml::{
             common::{
                 TomlAuthor, TomlProvider, TomlDetails, TomlLicense,
+                TomlSupportVersionReq,
             },
             library::{
                 LibraryToml, LibraryTomlImports, LibraryTomlImport,
             },
             rig::{
-                RigToml, RigTomlNushell, RigTomlExports,
+                RigToml, RigTomlSupport, RigTomlExports,
             },
         },
     },
+    //generated::ai::error::annotated::{Annotated, AnnotatedError},
+    check::{StrCase, StrCheck},
+    error::{EquipmentError, EquipmentResult, IoErr, StrErr},
 };
+
+pub use generated::ai::{
+    Annotated
+};
+
+pub mod prelude {
+    pub use crate::Annotated;
+}
 
 pub(crate) use std::{
     io,

@@ -5,6 +5,7 @@ members = [
 ]
 
 [workspace.dependencies]
+annotate-snippets = { version = "0.12" }
 pretty_assertions = { version = "1" }
 semver = { version = "1" }
 serde = { version = "1", features = ["derive"] }
@@ -12,3 +13,4 @@ snafu = "0.8"
 sourcetrait_testing = { version = "4" }
 spdx = { version = "0.13" }
 toml = { version = "0.8" }
+url = { version = "2" }

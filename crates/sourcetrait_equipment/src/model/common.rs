@@ -46,14 +46,10 @@ pub struct VersionReq(pub semver::VersionReq);
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Provider {
     pub key: BiKey,
-    pub account: ProviderAccount,
     pub reference: ProviderReference,
     pub mirror: ProviderMirror,
     pub contribute: ProviderContribute,
 }
-
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub struct ProviderAccount(pub String);
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ProviderReference(pub String);
@@ -70,16 +66,15 @@ pub struct ProviderContribute {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum ProviderUri {
-    Http(String),
-    Git(String),
-    Ssh(String),
+    Https(url::Url),
+    Git(url::Url),
+    Ssh(url::Url),
 }
-
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub struct GitHubProvider;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Spdx(pub spdx::Expression);
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct LibraryName(pub String);
+pub struct SupportVersionReq {
+    pub version: VersionReq,
+}

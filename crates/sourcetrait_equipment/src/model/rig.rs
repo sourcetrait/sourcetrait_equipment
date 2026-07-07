@@ -7,18 +7,19 @@ pub struct Rig {
     pub version: Version,
     pub provider: Provider,
     pub author: Author,
-    pub description: Details,
+    pub details: Details,
     pub license: License,
     pub exports: RigExports,
-    pub nushell: RigNushell,
+    pub support: RigSupport,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct RigExports {
-    pub libraries: Vec<LibraryName>,
+    pub libraries: Vec<BiKey>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct RigNushell {
-    pub version: Version,
+pub struct RigSupport {
+    pub nushell: SupportVersionReq,
+    pub equipment: SupportVersionReq,
 }

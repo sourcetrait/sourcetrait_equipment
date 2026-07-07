@@ -4,24 +4,25 @@ impl TryFrom<RigToml> for Rig {
     type Error = EquipmentError;
     fn try_from(v: RigToml) -> EquipmentResult<Self> {
         Ok(Self {
-            key: Key::try_from(v.name)?,
+            key: Key::try_from(v.key)?,
             title: Title::try_from(v.title)?,
             version: Version::try_from(v.version)?,
             provider: Provider::try_from(v.provider)?,
             author: Author::try_from(v.author)?,
-            description: Details::try_from(v.description)?,
+            details: Details::try_from(v.details)?,
             license: License::try_from(v.license)?,
             exports: RigExports::try_from(v.exports)?,
-            nushell: RigNushell::try_from(v.nushell)?,
+            support: RigSupport::try_from(v.support)?,
         })
     }
 }
 
-impl TryFrom<RigTomlNushell> for RigNushell {
+impl TryFrom<RigTomlSupport> for RigSupport {
     type Error = EquipmentError;
-    fn try_from(v: RigTomlNushell) -> EquipmentResult<Self> {
+    fn try_from(v: RigTomlSupport) -> EquipmentResult<Self> {
         Ok(Self {
-            version: Version::try_from(v.version)?,
+            nushell: SupportVersionReq::try_from(v.nushell)?,
+            equipment: SupportVersionReq::try_from(v.equipment)?,
         })
     }
 }
@@ -31,7 +32,7 @@ impl TryFrom<RigTomlExports> for RigExports {
     fn try_from(v: RigTomlExports) -> EquipmentResult<Self> {
         Ok(Self {
             libraries: v.libraries.into_iter()
-                .map(|s| LibraryName::try_from(s))
+                .map(|s| BiKey::try_from(s))
                 .collect::<EquipmentResult<_>>()?
         })
     }

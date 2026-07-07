@@ -36,7 +36,6 @@ impl TryFrom<LibraryTomlImport> for LibraryImport {
             version: VersionReq::try_from(v.version)?,
             provider: Key::try_from(v.provider)?,
             path: v.path,
-            
         })
     }
 }

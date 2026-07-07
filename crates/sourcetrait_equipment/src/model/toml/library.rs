@@ -13,6 +13,7 @@ pub struct LibraryToml {
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct LibraryTomlImports {
+    #[serde(alias = "libraries")]
     pub library: Vec<String>
 }
 

@@ -25,8 +25,15 @@ pub enum EquipmentError {
         str: String,
         err: StrErr,
     },
+    Url {
+        source: url::ParseError,
+        url: String,
+    },
     Email {
         address: String,
+    },
+    ProviderProtocol {
+        protocol: Option<String>
     },
 }
 
@@ -41,4 +48,10 @@ pub enum StrErr {
     MaxLen(usize),
     MinLen(usize),
     Path,
+}
+
+impl EquipmentError {
+    pub(crate) fn url<S: Into<String>>(source: url::ParseError, url: S) -> Self {
+        Self::Url { source, url: url.into() }
+    } 
 }

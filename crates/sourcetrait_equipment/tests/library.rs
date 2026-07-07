@@ -1,5 +1,5 @@
 use std::{path::PathBuf};
-use sourcetrait_equipment as equipment;
+use sourcetrait_equipment::{self as equipment, prelude::*};
 use sourcetrait_testing::prelude::*;
 use pretty_assertions::{assert_eq};
 
@@ -15,7 +15,7 @@ fn test_read() {
 
     let expected: equipment::Library = equipment::Library {
         key: equipment::Key::from("empower"),
-        title: equipment::Title::from("Empower"),
+        title: equipment::Title::from("SourceTrait Empower"),
         version: equipment::Version::from("0.0.0-4"),
         author: equipment::Author {
             name: equipment::Key::from("sourcetrait"),
@@ -41,7 +41,7 @@ fn test_read() {
     
     let actual = equipment::Library::read(
             test.fixture_dir().join(equipment::LibraryToml::LIBRARY_TOML)
-        ).expect("reads");
+        ).annotated().expect("TOML");
 
     assert_eq!(expected, actual);
 }

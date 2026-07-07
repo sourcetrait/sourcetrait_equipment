@@ -1,24 +1,5 @@
 use crate::*;
 
-impl LibraryName {
-    pub(crate) const CHECK: StrCheck = StrCheck::DEFAULT
-        .case(StrCase::Snake)
-        .max_len(16);
-}
-
-impl TryFrom<String> for LibraryName {
-    type Error = EquipmentError;
-    fn try_from(v: String) -> EquipmentResult<Self> {
-        Self::CHECK.valid(v).map(|v| Self(v))
-    }
-}
-
-impl From<&str> for LibraryName {
-    fn from(v: &str) -> Self {
-        Self::CHECK.valid(v.to_string()).map(|v| Self(v)).expect("valid")
-    }
-}
-
 impl Key {
     pub(crate) const CHECK: StrCheck = StrCheck::DEFAULT
         .case(StrCase::Snake)
@@ -63,7 +44,7 @@ impl TryFrom<String> for Key {
 }
 
 impl Title {
-    pub(crate) const CHECK: StrCheck = StrCheck::DEFAULT.max_len(16);
+    pub(crate) const CHECK: StrCheck = StrCheck::DEFAULT.max_len(32);
 }
 
 impl TryFrom<String> for Title {
@@ -233,6 +214,61 @@ impl TryFrom<String> for Email {
 
 impl From<&str> for Email {
     fn from(v: &str) -> Self {
-        Self::valid(v.to_string()).expect("valid email")
+        Self::try_from(v.to_string()).expect("valid email")
+    }
+}
+
+impl ProviderUri {
+    pub(crate) const HTTPS: &'static str = "https";
+    pub(crate) const SSH: &'static str = "ssh";
+}
+
+impl TryFrom<String> for ProviderUri {
+    type Error = EquipmentError;
+    fn try_from(v: String) -> EquipmentResult<Self> {
+        let url = url::Url::parse(&v)
+            .map_err(|e| EquipmentError::url(e, v))?;
+
+        match url.scheme() {
+            ProviderUri::HTTPS => Ok(Self::Https(url)),
+            ProviderUri::SSH => Ok(Self::Ssh(url)),
+            p => Err(EquipmentError::ProviderProtocol { protocol: Some(p.to_string()) }),
+        }
+    }
+}
+
+impl From<&str> for ProviderUri {
+    fn from(v: &str) -> Self {
+        Self::try_from(v.to_string()).expect("valid")
+    }
+}
+
+impl TryFrom<String> for ProviderReference {
+    type Error = EquipmentError;
+    fn try_from(v: String) -> EquipmentResult<Self> {
+        Ok(Self(v))
+    }
+}
+
+impl From<&str> for ProviderReference {
+    fn from(v: &str) -> Self { 
+        Self::try_from(v.to_string()).expect("valid")
+    }
+}
+
+impl TryFrom<TomlSupportVersionReq> for SupportVersionReq {
+    type Error = EquipmentError;
+    fn try_from(v: TomlSupportVersionReq) -> EquipmentResult<Self> {
+        Ok(Self {
+            version: VersionReq::try_from(v.version)?,
+        })
+    }
+}
+
+impl From<&str> for SupportVersionReq {
+    fn from(v: &str) -> Self {
+        Self {
+            version: VersionReq::try_from(v).expect("valid"),
+        }
     }
 }

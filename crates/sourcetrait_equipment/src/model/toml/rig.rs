@@ -2,15 +2,15 @@ use crate::*;
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct RigToml {
-    pub name: String,
+    pub key: String,
     pub title: String,
     pub version: String,
     pub author: TomlAuthor,
     pub provider: TomlProvider,
-    pub description: TomlDetails,
+    pub details: TomlDetails,
     pub license: TomlLicense,
     pub exports: RigTomlExports,
-    pub nushell: RigTomlNushell,
+    pub support: RigTomlSupport,
 }
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
@@ -19,8 +19,9 @@ pub struct RigTomlExports {
 }
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
-pub struct RigTomlNushell {
-    pub version: String,
+pub struct RigTomlSupport {
+    pub nushell: TomlSupportVersionReq,
+    pub equipment: TomlSupportVersionReq,
 }
 
 impl RigToml {
