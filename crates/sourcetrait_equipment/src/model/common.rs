@@ -4,6 +4,9 @@ use crate::*;
 pub struct Key(pub String);
 
 #[derive(Debug, Clone, PartialEq, Eq)]
+pub struct BiKey(pub Key, pub Key);
+
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Title(pub String);
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -17,10 +20,10 @@ pub struct Author {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct Summary(String);
+pub struct Summary(pub String);
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub struct Keyword(String);
+pub struct Keyword(pub String);
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Details {
@@ -42,7 +45,7 @@ pub struct VersionReq(pub semver::VersionReq);
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Provider {
-    pub name: Key,
+    pub key: BiKey,
     pub account: ProviderAccount,
     pub reference: ProviderReference,
     pub mirror: ProviderMirror,

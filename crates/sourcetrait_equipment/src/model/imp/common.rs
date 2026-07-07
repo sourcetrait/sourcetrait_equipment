@@ -26,6 +26,27 @@ impl Key {
 }
 
 impl From<&str> for Key { fn from(v: &str) -> Self { Self(v.to_string()) } }
+
+impl TryFrom<String> for BiKey {
+    type Error = EquipmentError;
+    fn try_from(v: String) -> EquipmentResult<Self> {
+        let (a,b) = v.split_once('/')
+            .map(|(a,b)| (a.to_string(), b.to_string()))
+            .ok_or_else(|| EquipmentError::String { str: v, err: StrErr::Path })?;
+        
+        Ok(Self(Key::try_from(a)?, Key::try_from(b)?))
+    }
+}
+
+impl From<(&str,&str)> for BiKey {
+    fn from(v: (&str, &str)) -> Self {
+        Self(
+            Key::try_from(v.0.to_string()).expect("valid"),
+            Key::try_from(v.1.to_string()).expect("valid")
+        )
+    }
+}
+
 impl From<&str> for Title { fn from(v: &str) -> Self { Self(v.to_string()) } }
 
 impl From<&str> for Version {
@@ -80,26 +101,17 @@ impl TryFrom<TomlAuthor> for Author {
     type Error = EquipmentError;
     fn try_from(v: TomlAuthor) -> EquipmentResult<Self> {
         Ok(Self {
-            name: Key::try_from(v.name)?,
+            name: Key::try_from(v.key)?,
             title: Title::try_from(v.title)?,
             email: Email::try_from(v.email)?,
         })
     }
 }
 
-impl Provider {
-    pub const GITHUB: &'static str = "github";
-}
-
 impl TryFrom<TomlProvider> for Provider {
     type Error = EquipmentError;
     fn try_from(v: TomlProvider) -> EquipmentResult<Self> {
-        let this = match v.name.as_str() {
-            Self::GITHUB => Self::GitHub(GitHubProvider),
-            _ => Self::Some(v.name),
-        };
-        
-        Ok(this)
+        todo!()
     }
 }
 
@@ -139,9 +151,9 @@ impl From<&str> for Keyword {
     }
 }
 
-impl TryFrom<TomlDescription> for Details {
+impl TryFrom<TomlDetails> for Details {
     type Error = EquipmentError;
-    fn try_from(v: TomlDescription) -> EquipmentResult<Self> {
+    fn try_from(v: TomlDetails) -> EquipmentResult<Self> {
         Ok(Self {
             summary: Summary::try_from(v.summary)?,
             keywords: v.keywords.into_iter()

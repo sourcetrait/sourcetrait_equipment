@@ -40,4 +40,5 @@ pub enum StrErr {
     Case(StrCase),
     MaxLen(usize),
     MinLen(usize),
+    Path,
 }

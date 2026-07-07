@@ -14,10 +14,20 @@ fn test_read() {
     });
 
     let expected: equipment::Rig = equipment::Rig {
-        name: equipment::Key::from("empower"),
+        key: equipment::Key::from("empower"),
         title: equipment::Title::from("Empower"),
         version: equipment::Version::from("0.0.0-2"),
-        provider: equipment::Provider::GitHub(equipment::GitHubProvider),
+        provider: equipment::Provider {
+            key: equipment::BiKey::from(("github", "sourcetrait")),
+            account: equipment::ProviderAccount::from("sourcetrait"),
+            reference: equipment::ProviderReference::from("dev"),
+            mirror: equipment::ProviderMirror {
+                uri: equipment::ProviderUri::from("https://github.com/sourcetrait"),
+            },
+            contribute: equipment::ProviderContribute {
+                uri: equipment::ProviderUri::from("https://github.com/sourcetrait"),
+            },
+        },
         author: equipment::Author {
             name: equipment::Key::from("sourcetrait"),
             title: equipment::Title::from("SourceTrait"),

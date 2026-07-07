@@ -2,24 +2,23 @@ use crate::*;
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct LibraryToml {
-    pub name: String,
+    pub key: String,
     pub title: String,
     pub author: TomlAuthor,
     pub version: String,
-    pub provider: TomlProvider,
-    pub description: TomlDescription,
+    pub details: TomlDetails,
     pub license: TomlLicense,
     pub imports: LibraryTomlImports,
 }
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct LibraryTomlImports {
-    pub libraries: Vec<LibraryTomlImport>
+    pub library: Vec<String>
 }
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct LibraryTomlImport {
-    pub name: String,
+    pub key: String,
     pub author: String,
     pub version: String,
     pub provider: String,

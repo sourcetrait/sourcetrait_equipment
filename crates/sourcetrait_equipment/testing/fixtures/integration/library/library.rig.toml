@@ -1,4 +1,4 @@
-name = "empower"
+key = "empower"
 title = "SourceTrait Empower"
 version = "0.0.0-4"
 
@@ -7,7 +7,7 @@ summary = "Empower platform library"
 keywords = ["ai"]
 
 [author]
-name = "sourcetrait"
+key = "sourcetrait"
 title = "SourceTrait"
 email = "development@sourcetrait.com"
 

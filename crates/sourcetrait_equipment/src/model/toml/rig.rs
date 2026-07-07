@@ -7,7 +7,7 @@ pub struct RigToml {
     pub version: String,
     pub author: TomlAuthor,
     pub provider: TomlProvider,
-    pub description: TomlDescription,
+    pub description: TomlDetails,
     pub license: TomlLicense,
     pub exports: RigTomlExports,
     pub nushell: RigTomlNushell,

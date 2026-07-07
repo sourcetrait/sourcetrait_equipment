@@ -14,16 +14,15 @@ fn test_read() {
     });
 
     let expected: equipment::Library = equipment::Library {
-        name: equipment::Key::from("empower"),
+        key: equipment::Key::from("empower"),
         title: equipment::Title::from("Empower"),
         version: equipment::Version::from("0.0.0-4"),
-        provider: equipment::Provider::GitHub(equipment::GitHubProvider),
         author: equipment::Author {
             name: equipment::Key::from("sourcetrait"),
             title: equipment::Title::from("SourceTrait"),
             email: equipment::Email::from("development@sourcetrait.com"),
         },
-        description: equipment::Details {
+        details: equipment::Details {
             summary: equipment::Summary::from("Empower platform library"),
             keywords: Vec::from([
                 equipment::Keyword::from("ai"),
@@ -35,13 +34,7 @@ fn test_read() {
         },
         imports: equipment::LibraryImports {
             libraries: Vec::from([
-                equipment::LibraryImport {
-                    name: equipment::Key::from("equip"),
-                    author: equipment::Key::from("sourcetrait"),
-                    version: equipment::VersionReq::from("0"),
-                    provider: equipment::Key::from("github"),
-                    path: None, 
-                },
+                equipment::BiKey::from(("sourcetrait", "equipment"))
             ]),
         },
     };
