@@ -39,7 +39,7 @@ pub use crate::{
         toml::{
             common::{
                 TomlAuthor, TomlProvider, TomlDetails, TomlLicense,
-                TomlSupportVersionReq,
+                TomlSupportVersionReq, TomlProviderMirror, TomlProviderContribute,
             },
             library::{
                 LibraryToml, LibraryTomlImports, LibraryTomlImport,

@@ -92,7 +92,30 @@ impl TryFrom<TomlAuthor> for Author {
 impl TryFrom<TomlProvider> for Provider {
     type Error = EquipmentError;
     fn try_from(v: TomlProvider) -> EquipmentResult<Self> {
-        todo!()
+        Ok(Self {
+            key: BiKey::try_from(v.key)?,
+            reference: ProviderReference::try_from(v.reference)?,
+            mirror: ProviderMirror::try_from(v.mirror)?,
+            contribute: ProviderContribute::try_from(v.contribute)?
+        })
+    }
+}
+
+impl TryFrom<TomlProviderMirror> for ProviderMirror {
+    type Error = EquipmentError;
+    fn try_from(v: TomlProviderMirror) -> EquipmentResult<Self> {
+        Ok(Self {
+            uri: ProviderUri::try_from(v.uri)?,
+        })
+    }
+}
+
+impl TryFrom<TomlProviderContribute> for ProviderContribute {
+    type Error = EquipmentError;
+    fn try_from(v: TomlProviderContribute) -> EquipmentResult<Self> {
+        Ok(Self {
+            uri: ProviderUri::try_from(v.uri)?,
+        })
     }
 }
 
