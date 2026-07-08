@@ -37,8 +37,6 @@ libraries = [
 
 [[imports.provider]]
 key = "github/sourcetrait"
-provider = "github"
-account = "sourcetrait"
 mirror.uri = "https://github.com/sourcetrait"
 contribute.uri = "ssh://git@github.com:sourcetrait"
 
