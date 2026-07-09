@@ -26,7 +26,7 @@ mirror.uri = "https://github.com/sourcetrait"
 contribute.uri = "ssh://git@github.com/sourcetrait"
 
 [exports]
-libraries = [
+rigs = [
     "sourcetrait/ant",
     "sourcetrait/drone",
     "sourcetrait/equip",
@@ -34,28 +34,38 @@ libraries = [
     "sourcetrait/fae",
     "sourcetrait/queen"
 ]
+gear = [
+    "sourcetrait/empwr"
+]
+bags = [
+    "sourcetrait/olmo/rust_know"
+]
 
-[[imports.provider]]
-key = "github/sourcetrait"
+[[imports.repository]]
+key = "git/sourcetrait/equipment"
 kind = "git"
-read.uri = "https://github.com/sourcetrait"
-write.uri = "ssh://git@github.com:sourcetrait"
-store.kind = "ipfs"
-store.ipns = "k51qzi5uqu5dkdbnmhuz1ksriva06ulvmaf3bu8ig8sm7vu3dvzt1gkda0sjee"
-
-[[imports.rig]]
-key = "sourcetrait/equipment"
-provider = "github/sourcetrait"
-read.path = "equipment.git"
+read.provider = "github"
+read.uri = "https://github.com/sourcetrait/equipment_equipment.git"
 read.reference = "v0.0.1"
-write.path = "equipment.git"
+write.provider = "github"
+write.uri = "ssh://git@github.com:sourcetrait/equipment_equipment.git"
 write.reference = "dev"
+
+[[imports.repository]]
+key = "ipfs/sourcetrait/equipment"
+kind = "ipfs"
+store.provider = "sourcetrait"
+store.ipns = "k51qzi5uqu5dkdbnmhuz1ksriva06ulvmaf3bu8ig8sm7vu3dvzt1gkda0sjee"
 store.cid = "bafkreigh6aess6gkvwadzqlfkxxeyzfofn67g63dkbtruy3ffyl7p65opa"
-store.path = "equipment.git"
 
-
-[[imports.library]]
-rig = "sourcetrait/equipment"
-library = "sourcetrait/equipment"
+[[imports.gear]]
+key = "sourcetrait/eqp"
 version = "0"
+repository = "git/sourcetrait/equipment"
+
+[[imports.bag]]
+key = "sourcetrait/omlo/docq"
+repository = "ipfs/sourcetrait/equipment"
+version = "0"
+
 
