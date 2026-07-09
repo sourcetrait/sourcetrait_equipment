@@ -1,61 +1,21 @@
 key = "empower"
 title = "SourceTrait Empower"
-version = "0.0.0-2"
+version = "0.0.0-4"
 
-[support]
-nushell.version = "0.113"
-equipment.version = "0"
+[details]
+summary = "Empower platform library"
+keywords = ["ai"]
 
 [author]
 key = "sourcetrait"
 title = "SourceTrait"
 email = "development@sourcetrait.com"
 
-[details]
-summary = "Empower rig"
-keywords = ["ai"]
-
 [license]
 spdx = "AGPL-3.0-or-later"
 file = "LICENSE-AGPL-3.txt"
 
-[provider]
-key = "github/sourcetrait"
-reference = "dev"
-mirror.uri = "https://github.com/sourcetrait"
-contribute.uri = "ssh://git@github.com/sourcetrait"
-
-[exports]
+[imports]
 libraries = [
-    "sourcetrait/ant",
-    "sourcetrait/drone",
-    "sourcetrait/equip",
-    "sourcetrait/empower",
-    "sourcetrait/fae",
-    "sourcetrait/queen"
+    "sourcetrait/equipment"
 ]
-
-[[imports.provider]]
-key = "github/sourcetrait"
-kind = "git"
-read.uri = "https://github.com/sourcetrait"
-write.uri = "ssh://git@github.com:sourcetrait"
-store.kind = "ipfs"
-store.ipns = "k51qzi5uqu5dkdbnmhuz1ksriva06ulvmaf3bu8ig8sm7vu3dvzt1gkda0sjee"
-
-[[imports.rig]]
-key = "sourcetrait/equipment"
-provider = "github/sourcetrait"
-read.path = "equipment.git"
-read.reference = "v0.0.1"
-write.path = "equipment.git"
-write.reference = "dev"
-store.cid = "bafkreigh6aess6gkvwadzqlfkxxeyzfofn67g63dkbtruy3ffyl7p65opa"
-store.path = "equipment.git"
-
-
-[[imports.library]]
-rig = "sourcetrait/equipment"
-library = "sourcetrait/equipment"
-version = "0"
-
