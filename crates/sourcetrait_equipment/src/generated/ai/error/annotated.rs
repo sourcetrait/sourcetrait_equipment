@@ -15,8 +15,6 @@
 use crate::*;
 use crate::generated::ai::*;
 
-// === EquipmentError::annotate ==============================================
-
 impl EquipmentError {
     /// Rich rendering: annotated source snippet for TOML parse errors, the
     /// plain `Display` for everything else.
@@ -73,15 +71,15 @@ fn annotate_toml_read(
 
 /// Wraps [`EquipmentError`] so that `Debug` — what `expect`/`unwrap` print —
 /// routes through [`EquipmentError::annotate`].
-pub struct AnnotatedError(pub EquipmentError);
+pub struct AnnotatedEquipmentError(pub(crate) EquipmentError);
 
-impl fmt::Display for AnnotatedError {
+impl fmt::Display for AnnotatedEquipmentError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         fmt::Display::fmt(&self.0.annotate(), f)
     }
 }
 
-impl fmt::Debug for AnnotatedError {
+impl fmt::Debug for AnnotatedEquipmentError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         // `expect(msg)` panics with `{msg}: {err:?}`; the leading newline
         // keeps the snippet flush-left instead of trailing the message.
@@ -89,27 +87,27 @@ impl fmt::Debug for AnnotatedError {
     }
 }
 
-impl std::error::Error for AnnotatedError {
+impl std::error::Error for AnnotatedEquipmentError {
     fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
         Some(&self.0)
     }
 }
 
-impl From<AnnotatedError> for EquipmentError {
-    fn from(err: AnnotatedError) -> Self {
+impl From<AnnotatedEquipmentError> for EquipmentError {
+    fn from(err: AnnotatedEquipmentError) -> Self {
         err.0
     }
 }
 
 /// Extension for [`EquipmentResult`]: swaps the error side so failures
 /// print annotated.
-pub trait Annotated<T> {
+pub trait AnnotatedResult<T> {
     /// Wraps the error in [`AnnotatedError`].
-    fn annotated(self) -> Result<T, AnnotatedError>;
+    fn annotated(self) -> Result<T, AnnotatedEquipmentError>;
 }
 
-impl<T> Annotated<T> for EquipmentResult<T> {
-    fn annotated(self) -> Result<T, AnnotatedError> {
-        self.map_err(AnnotatedError)
+impl<T> AnnotatedResult<T> for EquipmentResult<T> {
+    fn annotated(self) -> Result<T, AnnotatedEquipmentError> {
+        self.map_err(AnnotatedEquipmentError)
     }
 }

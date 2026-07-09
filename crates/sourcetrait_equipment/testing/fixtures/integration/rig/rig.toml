@@ -37,15 +37,22 @@ libraries = [
 
 [[imports.provider]]
 key = "github/sourcetrait"
-mirror.uri = "https://github.com/sourcetrait"
-contribute.uri = "ssh://git@github.com:sourcetrait"
+kind = "git"
+read.uri = "https://github.com/sourcetrait"
+write.uri = "ssh://git@github.com:sourcetrait"
+store.kind = "ipfs"
+store.ipns = "k51qzi5uqu5dkdbnmhuz1ksriva06ulvmaf3bu8ig8sm7vu3dvzt1gkda0sjee"
 
 [[imports.rig]]
 key = "sourcetrait/equipment"
-provider.key = "github/sourcetrait"
-provider.mirror.path = "equip.git"
-provider.contribute.path = "equip.git"
-provider.reference = "dev"
+provider = "github/sourcetrait"
+read.path = "equipment.git"
+read.reference = "v0.0.1"
+write.path = "equipment.git"
+write.reference = "dev"
+store.cid = "bafkreigh6aess6gkvwadzqlfkxxeyzfofn67g63dkbtruy3ffyl7p65opa"
+store.path = "equipment.git"
+
 
 [[imports.library]]
 rig = "sourcetrait/equipment"

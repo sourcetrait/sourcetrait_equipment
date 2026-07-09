@@ -5,7 +5,7 @@ pub(in crate::generated::ai) mod error {
 }
 
 pub use crate::generated::ai::{
-    error::annotated::Annotated,
+    error::annotated::AnnotatedResult,
 };
 
 pub(self) use std::{

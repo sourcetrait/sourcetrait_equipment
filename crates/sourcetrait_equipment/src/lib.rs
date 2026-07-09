@@ -49,17 +49,16 @@ pub use crate::{
             },
         },
     },
-    //generated::ai::error::annotated::{Annotated, AnnotatedError},
     check::{StrCase, StrCheck},
     error::{EquipmentError, EquipmentResult, IoErr, StrErr},
 };
 
 pub use generated::ai::{
-    Annotated
+    AnnotatedResult
 };
 
 pub mod prelude {
-    pub use crate::Annotated;
+    pub use crate::AnnotatedResult;
 }
 
 pub(crate) use std::{
