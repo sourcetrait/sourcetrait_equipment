@@ -64,7 +64,7 @@ version = "0"
 repository = "git/sourcetrait/equipment"
 
 [[imports.bag]]
-key = "sourcetrait/omlo/docq"
+key = "sourcetrait/olmo/docq"
 repository = "ipfs/sourcetrait/equipment"
 version = "0"
 
