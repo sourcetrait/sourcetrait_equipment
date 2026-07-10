@@ -21,15 +21,15 @@ impl TryFrom<EquipmentTomlSupport> for EquipmentSupport {
     type Error = EquipmentError;
     fn try_from(v: EquipmentTomlSupport) -> EquipmentResult<Self> {
         Ok(Self {
-            nushell: SupportVersionReq::try_from(v.nushell)?,
-            equipment: SupportVersionReq::try_from(v.equipment)?,
+            nushell: VersionReq::try_from(v.nushell)?,
+            equipment: VersionReq::try_from(v.equipment)?,
         })
     }
 }
 
-impl TryFrom<EquipmentTomlExports> for EquipmentExports {
+impl TryFrom<EquipmentExportsToml> for EquipmentExports {
     type Error = EquipmentError;
-    fn try_from(v: EquipmentTomlExports) -> EquipmentResult<Self> {
+    fn try_from(v: EquipmentExportsToml) -> EquipmentResult<Self> {
         Ok(Self {
             rig: v.libraries.into_iter()
                 .map(|s| BiKey::try_from(s))

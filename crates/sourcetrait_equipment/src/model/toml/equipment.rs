@@ -10,12 +10,16 @@ pub struct EquipmentToml {
     pub details: TomlDetails,
     pub license: TomlLicense,
     pub support: EquipmentTomlSupport,
-    pub exports: EquipmentTomlExports,
+    pub exports: EquipmentExportsToml,
 }
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
-pub struct EquipmentTomlExports {
-    pub libraries: Vec<String>,
+pub struct EquipmentExportsToml {
+    pub rig: Vec<String>,
+    pub gear_box: Vec<String>,
+    pub gear_desk: Vec<String>,
+    pub gear_lib: Vec<String>,
+    pub bag: Vec<String>,
 }
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]

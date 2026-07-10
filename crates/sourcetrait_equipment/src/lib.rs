@@ -49,7 +49,7 @@ pub use crate::{
                 LibraryToml, LibraryTomlImports, LibraryTomlImport,
             },
             equipment::{
-                EquipmentToml, EquipmentTomlSupport, EquipmentTomlExports,
+                EquipmentToml, EquipmentTomlSupport, EquipmentExportsToml,
             },
         },
     },
