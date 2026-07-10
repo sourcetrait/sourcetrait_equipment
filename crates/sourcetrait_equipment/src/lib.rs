@@ -6,16 +6,16 @@ pub(crate) mod error;
 pub(crate) mod model {
     pub(crate) mod imp {
         pub(crate) mod common;
-        pub(crate) mod library;
         pub(crate) mod rig;
+        pub(crate) mod equipment;
     }
     pub(crate) mod toml {
         pub(crate) mod imp {
-            pub(crate) mod library;
+            pub(crate) mod rig;
         }
         pub(crate) mod common;
-        pub(crate) mod library;
         pub(crate) mod rig;
+        pub(crate) mod equipment;
     }
     pub(crate) mod common;
     pub(crate) mod rig;
@@ -45,11 +45,11 @@ pub use crate::{
                 TomlAuthor, TomlProvider, TomlDetails, TomlLicense,
                 TomlSupportVersionReq, TomlProviderMirror, TomlProviderContribute,
             },
-            library::{
+            rig::{
                 LibraryToml, LibraryTomlImports, LibraryTomlImport,
             },
-            rig::{
-                RigToml, RigTomlSupport, RigTomlExports,
+            equipment::{
+                EquipmentToml, EquipmentTomlSupport, EquipmentTomlExports,
             },
         },
     },
