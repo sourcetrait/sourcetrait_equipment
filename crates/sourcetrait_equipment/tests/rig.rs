@@ -13,18 +13,18 @@ fn test_read() {
         .inherit_fixture_dir()
     });
 
-    let expected: equipment::Rig = equipment::Rig {
+    let expected: equipment::Equipment = equipment::Equipment {
         key: equipment::Key::from("empower"),
         title: equipment::Title::from("SourceTrait Empower"),
         version: equipment::Version::from("0.0.0-2"),
-        provider: equipment::Provider {
+        repositories: equipment::Provider {
             key: equipment::BiKey::from(("github", "sourcetrait")),
-            reference: equipment::ProviderReference::from("dev"),
+            reference: equipment::GitReference::from("dev"),
             mirror: equipment::ProviderMirror {
-                uri: equipment::ProviderUri::from("https://github.com/sourcetrait"),
+                uri: equipment::GitUri::from("https://github.com/sourcetrait"),
             },
             contribute: equipment::ProviderContribute {
-                uri: equipment::ProviderUri::from("ssh://git@github.com/sourcetrait"),
+                uri: equipment::GitUri::from("ssh://git@github.com/sourcetrait"),
             },
         },
         author: equipment::Author {
@@ -42,8 +42,8 @@ fn test_read() {
             spdx: Some(equipment::Spdx::from("AGPL-3.0-or-later")),
             file: PathBuf::from("LICENSE-AGPL-3.txt"),
         },
-        exports: equipment::RigExports {
-            libraries: Vec::from([
+        exports: equipment::EquipmentExports {
+            rig: Vec::from([
                 equipment::BiKey::from(("sourcetrait", "ant")),
                 equipment::BiKey::from(("sourcetrait", "drone")),
                 equipment::BiKey::from(("sourcetrait", "equip")),
@@ -52,13 +52,13 @@ fn test_read() {
                 equipment::BiKey::from(("sourcetrait", "queen")),
             ]),
         },
-        support: equipment::RigSupport {
+        support: equipment::EquipmentSupport {
             nushell: equipment::SupportVersionReq::from("0.113"),
             equipment: equipment::SupportVersionReq::from("0"),
         }, 
     };
     
-    let actual = equipment::Rig::read(
+    let actual = equipment::Equipment::read(
         test.fixture_dir().join(equipment::RigToml::RIG_TOML)
     ).annotated().expect("TOML");
 

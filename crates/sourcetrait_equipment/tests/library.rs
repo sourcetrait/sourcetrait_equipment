@@ -13,7 +13,7 @@ fn test_read() {
         .inherit_fixture_dir()
     });
 
-    let expected: equipment::Library = equipment::Library {
+    let expected: equipment::Rig = equipment::Rig {
         key: equipment::Key::from("empower"),
         title: equipment::Title::from("SourceTrait Empower"),
         version: equipment::Version::from("0.0.0-4"),
@@ -32,14 +32,14 @@ fn test_read() {
             spdx: Some(equipment::Spdx::from("AGPL-3.0-or-later")),
             file: PathBuf::from("LICENSE-AGPL-3.txt"),
         },
-        imports: equipment::LibraryImports {
+        imports: equipment::RigImports {
             libraries: Vec::from([
                 equipment::BiKey::from(("sourcetrait", "equipment"))
             ]),
         },
     };
     
-    let actual = equipment::Library::read(
+    let actual = equipment::Rig::read(
             test.fixture_dir().join(equipment::LibraryToml::LIBRARY_TOML)
         ).annotated().expect("TOML");
 

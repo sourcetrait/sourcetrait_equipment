@@ -12,6 +12,7 @@ keywords = ["sourcetrait", "equipment"]
 
 [dependencies]
 annotate-snippets.workspace = true
+data-encoding.workspace = true
 semver.workspace = true
 serde.workspace = true
 snafu.workspace = true

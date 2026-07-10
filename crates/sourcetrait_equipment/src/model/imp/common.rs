@@ -1,5 +1,10 @@
 use crate::*;
 
+pub trait RepositoryTrait: Clone + PartialEq {
+    fn kind(&self) -> RepositoryKind;
+    fn provider(&self) -> &Key;
+}
+
 impl Key {
     pub(crate) const CHECK: StrCheck = StrCheck::DEFAULT
         .case(StrCase::Snake)
@@ -94,7 +99,7 @@ impl TryFrom<TomlProvider> for Provider {
     fn try_from(v: TomlProvider) -> EquipmentResult<Self> {
         Ok(Self {
             key: BiKey::try_from(v.key)?,
-            reference: ProviderReference::try_from(v.reference)?,
+            reference: GitReference::try_from(v.reference)?,
             mirror: ProviderMirror::try_from(v.mirror)?,
             contribute: ProviderContribute::try_from(v.contribute)?
         })
@@ -105,7 +110,7 @@ impl TryFrom<TomlProviderMirror> for ProviderMirror {
     type Error = EquipmentError;
     fn try_from(v: TomlProviderMirror) -> EquipmentResult<Self> {
         Ok(Self {
-            uri: ProviderUri::try_from(v.uri)?,
+            uri: GitUri::try_from(v.uri)?,
         })
     }
 }
@@ -114,7 +119,7 @@ impl TryFrom<TomlProviderContribute> for ProviderContribute {
     type Error = EquipmentError;
     fn try_from(v: TomlProviderContribute) -> EquipmentResult<Self> {
         Ok(Self {
-            uri: ProviderUri::try_from(v.uri)?,
+            uri: GitUri::try_from(v.uri)?,
         })
     }
 }
@@ -241,57 +246,54 @@ impl From<&str> for Email {
     }
 }
 
-impl ProviderUri {
+impl GitUri {
     pub(crate) const HTTPS: &'static str = "https";
     pub(crate) const SSH: &'static str = "ssh";
 }
 
-impl TryFrom<String> for ProviderUri {
+impl TryFrom<String> for GitUri {
     type Error = EquipmentError;
     fn try_from(v: String) -> EquipmentResult<Self> {
         let url = url::Url::parse(&v)
             .map_err(|e| EquipmentError::url(e, v))?;
 
         match url.scheme() {
-            ProviderUri::HTTPS => Ok(Self::Https(url)),
-            ProviderUri::SSH => Ok(Self::Ssh(url)),
+            GitUri::HTTPS => Ok(Self::Https(url)),
+            GitUri::SSH => Ok(Self::Ssh(url)),
             p => Err(EquipmentError::ProviderProtocol { protocol: Some(p.to_string()) }),
         }
     }
 }
 
-impl From<&str> for ProviderUri {
+impl From<&str> for GitUri {
     fn from(v: &str) -> Self {
         Self::try_from(v.to_string()).expect("valid")
     }
 }
 
-impl TryFrom<String> for ProviderReference {
+impl TryFrom<String> for GitReference {
     type Error = EquipmentError;
     fn try_from(v: String) -> EquipmentResult<Self> {
         Ok(Self(v))
     }
 }
 
-impl From<&str> for ProviderReference {
+impl From<&str> for GitReference {
     fn from(v: &str) -> Self { 
         Self::try_from(v.to_string()).expect("valid")
     }
 }
 
-impl TryFrom<TomlSupportVersionReq> for SupportVersionReq {
+impl TryFrom<TomlSupportVersionReq> for VersionReq {
     type Error = EquipmentError;
     fn try_from(v: TomlSupportVersionReq) -> EquipmentResult<Self> {
-        Ok(Self {
-            version: VersionReq::try_from(v.version)?,
-        })
+        Ok(Self::try_from(v.version)?)
     }
 }
 
-impl From<&str> for SupportVersionReq {
-    fn from(v: &str) -> Self {
-        Self {
-            version: VersionReq::try_from(v).expect("valid"),
-        }
-    }
+impl RepositoryTrait for GitRepository {
+    #[inline]
+    fn kind(&self) -> RepositoryKind { RepositoryKind::Git }
+    #[inline]
+    fn provider(&self) -> &Key { &self.provider }
 }

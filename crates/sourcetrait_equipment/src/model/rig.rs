@@ -5,21 +5,22 @@ pub struct Rig {
     pub key: Key,
     pub title: Title,
     pub version: Version,
-    pub provider: Provider,
     pub author: Author,
     pub details: Details,
     pub license: License,
-    pub exports: RigExports,
-    pub support: RigSupport,
+    pub imports: RigImports,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub struct RigExports {
+#[derive(Debug, Clone, PartialEq)]
+pub struct RigImports {
     pub libraries: Vec<BiKey>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub struct RigSupport {
-    pub nushell: SupportVersionReq,
-    pub equipment: SupportVersionReq,
+#[derive(Debug, Clone, PartialEq)]
+pub struct RigImport {
+    pub key: Key,
+    pub author: Key,
+    pub version: VersionReq,
+    pub provider: Key,
+    pub path: Option<PathBuf>,
 }

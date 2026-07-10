@@ -1,6 +1,6 @@
 use crate::*;
 
-impl TryFrom<LibraryToml> for Library {
+impl TryFrom<LibraryToml> for Rig {
     type Error = EquipmentError;
 
     fn try_from(v: LibraryToml) -> EquipmentResult<Self> {
@@ -11,12 +11,12 @@ impl TryFrom<LibraryToml> for Library {
             author: Author::try_from(v.author)?,
             details: Details::try_from(v.details)?,
             license: License::try_from(v.license)?, 
-            imports: LibraryImports::try_from(v.imports)?,
+            imports: RigImports::try_from(v.imports)?,
         })
     }
 }
 
-impl TryFrom<LibraryTomlImports> for LibraryImports {
+impl TryFrom<LibraryTomlImports> for RigImports {
     type Error = EquipmentError;
     fn try_from(v: LibraryTomlImports) -> EquipmentResult<Self> {
         Ok(Self {
@@ -27,7 +27,7 @@ impl TryFrom<LibraryTomlImports> for LibraryImports {
     }
 }
 
-impl TryFrom<LibraryTomlImport> for LibraryImport {
+impl TryFrom<LibraryTomlImport> for RigImport {
     type Error = EquipmentError;
     fn try_from(v: LibraryTomlImport) -> EquipmentResult<Self> {
         Ok(Self {
@@ -40,7 +40,7 @@ impl TryFrom<LibraryTomlImport> for LibraryImport {
     }
 }
 
-impl Library {
+impl Rig {
     pub fn read<P: AsRef<Path> + Into<PathBuf>>(path: P) -> EquipmentResult<Self> {
         Self::try_from(LibraryToml::read(path)?)
     }

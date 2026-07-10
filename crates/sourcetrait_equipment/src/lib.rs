@@ -18,23 +18,27 @@ pub(crate) mod model {
         pub(crate) mod rig;
     }
     pub(crate) mod common;
-    pub(crate) mod library;
     pub(crate) mod rig;
+    pub(crate) mod equipment;
 }
 
 pub use crate::{
     model::{
-        common::{
-            Key, BiKey, Title, Details, Provider, License, Author, Version,
-            Email, Summary, Keyword, Spdx, SupportVersionReq,
-            VersionReq, ProviderContribute, ProviderMirror,
-            ProviderReference, ProviderUri,
+        imp::{
+            common::{
+                RepositoryTrait,
+            },
         },
-        library::{
-            Library, LibraryImports, LibraryImport,
+        common::{
+            Key, BiKey, TriKey, Title, Details, License, Author, Version,
+            Email, Summary, Keyword, Spdx, RepositoryKind, GenericRepositorySet,
+            VersionReq, GitReference, GitUri, RepositorySet, GitRepository,
         },
         rig::{
-            Rig, RigExports, RigSupport,
+            Rig, RigImports, RigImport,
+        },
+        equipment::{
+            Equipment, EquipmentExports, EquipmentSupport,
         },
         toml::{
             common::{
@@ -61,8 +65,18 @@ pub mod prelude {
     pub use crate::AnnotatedResult;
 }
 
+pub(crate) use generated::ai::{
+    BaseEncDec,
+    base32,
+    base36,
+};
+
+#[allow(unused)]
 pub(crate) use std::{
     io,
     fs,
+    fmt,
+    str::FromStr,
     path::{Path,PathBuf},
 };
+

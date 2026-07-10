@@ -48,6 +48,7 @@ pub enum StrErr {
     MaxLen(usize),
     MinLen(usize),
     Path,
+    Encoding,
 }
 
 impl EquipmentError {
