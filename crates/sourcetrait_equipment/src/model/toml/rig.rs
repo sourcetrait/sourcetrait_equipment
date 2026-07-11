@@ -10,6 +10,23 @@ pub struct RigToml {
     pub license: LicenseToml,
     pub imports: RigImportsToml,
 }
+
+impl TryFrom<RigToml> for Rig {
+    type Error = EquipmentError;
+
+    fn try_from(v: RigToml) -> EquipmentResult<Self> {
+        Ok(Self {
+            key: BiKey::try_from(v.key)?,
+            title: Title::try_from(v.title)?,
+            version: Version::try_from(v.version)?,
+            author: Author::try_from(v.author)?,
+            details: Details::try_from(v.details)?,
+            license: License::try_from(v.license)?, 
+            imports: RigImports::try_from(v.imports)?,
+        })
+    }
+}
+
 impl RigToml {
     pub const RIG_TOML: &'static str = "rig.toml";
     
@@ -27,17 +44,3 @@ impl RigToml {
     }
 }
 
-#[derive(Debug, serde::Serialize, serde::Deserialize)]
-pub struct RigImportsToml {
-    #[serde(alias = "libraries")]
-    pub library: Vec<String>
-}
-
-#[derive(Debug, serde::Serialize, serde::Deserialize)]
-pub struct RigImportToml {
-    pub key: String,
-    pub author: String,
-    pub version: String,
-    pub provider: String,
-    pub path: Option<PathBuf>,
-}

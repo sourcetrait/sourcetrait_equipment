@@ -17,15 +17,6 @@ impl TryFrom<EquipmentToml> for Equipment {
     }
 }
 
-impl TryFrom<EquipmentSupportToml> for EquipmentSupport {
-    type Error = EquipmentError;
-    fn try_from(v: EquipmentSupportToml) -> EquipmentResult<Self> {
-        Ok(Self {
-            nushell: VersionReq::try_from(v.nushell)?,
-            equipment: VersionReq::try_from(v.equipment)?,
-        })
-    }
-}
 
 impl TryFrom<EquipmentExportsToml> for EquipmentExports {
     type Error = EquipmentError;

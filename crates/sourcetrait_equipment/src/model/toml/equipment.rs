@@ -13,20 +13,6 @@ pub struct EquipmentToml {
     pub exports: EquipmentExportsToml,
 }
 
-#[derive(Debug, serde::Serialize, serde::Deserialize)]
-pub struct EquipmentExportsToml {
-    pub rig: Vec<String>,
-    pub gear_box: Vec<String>,
-    pub gear_desk: Vec<String>,
-    pub gear_lib: Vec<String>,
-    pub bag: Vec<String>,
-}
-
-#[derive(Debug, serde::Serialize, serde::Deserialize)]
-pub struct EquipmentSupportToml {
-    pub nushell: TomlSupportVersionReq,
-    pub equipment: TomlSupportVersionReq,
-}
 
 impl EquipmentToml {
     pub const EQUIPMENT_TOML: &'static str = "equipment.toml";

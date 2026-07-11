@@ -43,9 +43,17 @@ pub(crate) mod model {
         pub(crate) mod equipment;
     }
     pub(crate) mod toml {
+        pub(crate) mod author;
         pub(crate) mod common;
-        pub(crate) mod rig;
+        pub(crate) mod details;
         pub(crate) mod equipment;
+        pub(crate) mod equipment_exports;
+        pub(crate) mod equipment_support;
+        pub(crate) mod license;
+        pub(crate) mod repository_set;
+        pub(crate) mod rig;
+        pub(crate) mod rig_import;
+        pub(crate) mod rig_imports;
     }
     pub(crate) mod traits;
 }
@@ -85,19 +93,18 @@ pub use crate::{
             version::Version,
             version_req::VersionReq,
         },
-        traits::{FromFixed, RepositoryTrait},
         toml::{
-            common::{
-                AuthorToml, TomlProvider, DetailsToml, LicenseToml,
-                TomlSupportVersionReq, TomlProviderMirror, TomlProviderContribute,
-            },
-            rig::{
-                RigToml, RigImportsToml, RigImportToml,
-            },
-            equipment::{
-                EquipmentToml, EquipmentSupportToml, EquipmentExportsToml,
-            },
+            author::AuthorToml,
+            details::DetailsToml,
+            equipment::EquipmentToml,
+            equipment_exports::EquipmentExportsToml,
+            equipment_support::EquipmentSupportToml,
+            license::LicenseToml,
+            rig::RigToml,
+            rig_import::RigImportToml,
+            rig_imports::RigImportsToml,
         },
+        traits::{FromFixed, RepositoryTrait},
     },
     check::{StrCase, StrCheck},
     error::{EquipmentError, EquipmentResult, IoErr, StrErr},
