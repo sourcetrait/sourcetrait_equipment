@@ -5,11 +5,11 @@ pub struct EquipmentToml {
     pub key: String,
     pub title: String,
     pub version: String,
-    pub author: TomlAuthor,
+    pub author: AuthorToml,
     pub provider: TomlProvider,
-    pub details: TomlDetails,
-    pub license: TomlLicense,
-    pub support: EquipmentTomlSupport,
+    pub details: DetailsToml,
+    pub license: LicenseToml,
+    pub support: EquipmentSupportToml,
     pub exports: EquipmentExportsToml,
 }
 
@@ -23,7 +23,7 @@ pub struct EquipmentExportsToml {
 }
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
-pub struct EquipmentTomlSupport {
+pub struct EquipmentSupportToml {
     pub nushell: TomlSupportVersionReq,
     pub equipment: TomlSupportVersionReq,
 }

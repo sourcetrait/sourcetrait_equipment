@@ -2,7 +2,7 @@ use crate::*;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Equipment {
-    pub key: Key,
+    pub key: BiKey,
     pub title: Title,
     pub version: Version,
     pub author: Author,

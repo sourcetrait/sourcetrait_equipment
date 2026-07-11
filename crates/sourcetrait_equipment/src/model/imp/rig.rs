@@ -1,11 +1,11 @@
 use crate::*;
 
-impl TryFrom<LibraryToml> for Rig {
+impl TryFrom<RigToml> for Rig {
     type Error = EquipmentError;
 
-    fn try_from(v: LibraryToml) -> EquipmentResult<Self> {
+    fn try_from(v: RigToml) -> EquipmentResult<Self> {
         Ok(Self {
-            key: Key::try_from(v.key)?,
+            key: BiKey::try_from(v.key)?,
             title: Title::try_from(v.title)?,
             version: Version::try_from(v.version)?,
             author: Author::try_from(v.author)?,
@@ -16,9 +16,9 @@ impl TryFrom<LibraryToml> for Rig {
     }
 }
 
-impl TryFrom<LibraryTomlImports> for RigImports {
+impl TryFrom<RigImportsToml> for RigImports {
     type Error = EquipmentError;
-    fn try_from(v: LibraryTomlImports) -> EquipmentResult<Self> {
+    fn try_from(v: RigImportsToml) -> EquipmentResult<Self> {
         Ok(Self {
             libraries: v.library.into_iter()
                 .map(|v| BiKey::try_from(v))
@@ -27,11 +27,11 @@ impl TryFrom<LibraryTomlImports> for RigImports {
     }
 }
 
-impl TryFrom<LibraryTomlImport> for RigImport {
+impl TryFrom<RigImportToml> for RigImport {
     type Error = EquipmentError;
-    fn try_from(v: LibraryTomlImport) -> EquipmentResult<Self> {
+    fn try_from(v: RigImportToml) -> EquipmentResult<Self> {
         Ok(Self {
-            key: Key::try_from(v.key)?,
+            key: BiKey::try_from(v.key)?,
             author: Key::try_from(v.author)?,
             version: VersionReq::try_from(v.version)?,
             provider: Key::try_from(v.provider)?,

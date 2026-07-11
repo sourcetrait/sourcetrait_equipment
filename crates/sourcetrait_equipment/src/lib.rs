@@ -43,9 +43,6 @@ pub(crate) mod model {
         pub(crate) mod equipment;
     }
     pub(crate) mod toml {
-        pub(crate) mod imp {
-            pub(crate) mod rig;
-        }
         pub(crate) mod common;
         pub(crate) mod rig;
         pub(crate) mod equipment;
@@ -91,14 +88,14 @@ pub use crate::{
         traits::{FromFixed, RepositoryTrait},
         toml::{
             common::{
-                TomlAuthor, TomlProvider, TomlDetails, TomlLicense,
+                AuthorToml, TomlProvider, DetailsToml, LicenseToml,
                 TomlSupportVersionReq, TomlProviderMirror, TomlProviderContribute,
             },
             rig::{
-                LibraryToml, LibraryTomlImports, LibraryTomlImport,
+                RigToml, RigImportsToml, RigImportToml,
             },
             equipment::{
-                EquipmentToml, EquipmentTomlSupport, EquipmentExportsToml,
+                EquipmentToml, EquipmentSupportToml, EquipmentExportsToml,
             },
         },
     },

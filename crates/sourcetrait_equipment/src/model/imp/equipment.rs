@@ -4,7 +4,7 @@ impl TryFrom<EquipmentToml> for Equipment {
     type Error = EquipmentError;
     fn try_from(v: EquipmentToml) -> EquipmentResult<Self> {
         Ok(Self {
-            key: Key::try_from(v.key)?,
+            key: BiKey::try_from(v.key)?,
             title: Title::try_from(v.title)?,
             version: Version::try_from(v.version)?,
             repositories: v.provider,
@@ -17,9 +17,9 @@ impl TryFrom<EquipmentToml> for Equipment {
     }
 }
 
-impl TryFrom<EquipmentTomlSupport> for EquipmentSupport {
+impl TryFrom<EquipmentSupportToml> for EquipmentSupport {
     type Error = EquipmentError;
-    fn try_from(v: EquipmentTomlSupport) -> EquipmentResult<Self> {
+    fn try_from(v: EquipmentSupportToml) -> EquipmentResult<Self> {
         Ok(Self {
             nushell: VersionReq::try_from(v.nushell)?,
             equipment: VersionReq::try_from(v.equipment)?,

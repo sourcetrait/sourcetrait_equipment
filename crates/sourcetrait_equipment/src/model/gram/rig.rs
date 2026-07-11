@@ -2,7 +2,7 @@ use crate::*;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Rig {
-    pub key: Key,
+    pub key: BiKey,
     pub title: Title,
     pub version: Version,
     pub author: Author,
@@ -13,6 +13,6 @@ pub struct Rig {
 
 impl Rig {
     pub fn read_toml<P: AsRef<Path> + Into<PathBuf>>(path: P) -> EquipmentResult<Self> {
-        Self::try_from(LibraryToml::read(path)?)
+        Self::try_from(RigToml::read(path)?)
     }
 }

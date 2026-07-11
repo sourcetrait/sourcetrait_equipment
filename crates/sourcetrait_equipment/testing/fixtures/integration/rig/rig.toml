@@ -1,9 +1,9 @@
-key = "empower"
+key = "sourcetrait/empower"
 title = "SourceTrait Empower"
 version = "0.0.0-4"
 
 [details]
-summary = "Empower platform library"
+summary = "Empower rig"
 keywords = ["ai"]
 
 [author]
@@ -15,7 +15,3 @@ email = "development@sourcetrait.com"
 spdx = "AGPL-3.0-or-later"
 file = "LICENSE-AGPL-3.txt"
 
-[imports]
-libraries = [
-    "sourcetrait/equipment"
-]

@@ -13,27 +13,17 @@ fn test_read() {
         .inherit_fixture_dir()
     });
 
-    let expected: equipment::Equipment = equipment::Equipment {
-        key: equipment::Key::fixed("empower"),
+    let expected: equipment::Rig = equipment::Rig {
+        key: equipment::BiKey::fixed("empower"),
         title: equipment::Title::from("SourceTrait Empower"),
-        version: equipment::Version::from("0.0.0-2"),
-        repositories: equipment::Provider {
-            key: equipment::BiKey::from(("github", "sourcetrait")),
-            reference: equipment::GitReference::from("dev"),
-            mirror: equipment::ProviderMirror {
-                uri: equipment::GitUri::from("https://github.com/sourcetrait"),
-            },
-            contribute: equipment::ProviderContribute {
-                uri: equipment::GitUri::from("ssh://git@github.com/sourcetrait"),
-            },
-        },
+        version: equipment::Version::from("0.0.0-4"),
         author: equipment::Author {
-            name: equipment::Key::from("sourcetrait"),
+            name: equipment::BiKey::fixed("sourcetrait"),
             title: equipment::Title::from("SourceTrait"),
             email: equipment::Email::from("development@sourcetrait.com"),
         },
         details: equipment::Details {
-            summary: equipment::Summary::from("Empower rig"),
+            summary: equipment::Summary::from("Empower platform library"),
             keywords: Vec::from([
                 equipment::Keyword::from("ai"),
             ]),
@@ -42,25 +32,16 @@ fn test_read() {
             spdx: Some(equipment::Spdx::from("AGPL-3.0-or-later")),
             file: PathBuf::from("LICENSE-AGPL-3.txt"),
         },
-        exports: equipment::EquipmentExports {
-            rig: Vec::from([
-                equipment::BiKey::from(("sourcetrait", "ant")),
-                equipment::BiKey::from(("sourcetrait", "drone")),
-                equipment::BiKey::from(("sourcetrait", "equip")),
-                equipment::BiKey::from(("sourcetrait", "empower")),
-                equipment::BiKey::from(("sourcetrait", "fae")),
-                equipment::BiKey::from(("sourcetrait", "queen")),
+        imports: equipment::RigImports {
+            libraries: Vec::from([
+                equipment::BiKey::from(("sourcetrait", "equipment"))
             ]),
         },
-        support: equipment::EquipmentSupport {
-            nushell: equipment::SupportVersionReq::from("0.113"),
-            equipment: equipment::SupportVersionReq::from("0"),
-        }, 
     };
     
-    let actual = equipment::Equipment::read(
-        test.fixture_dir().join(equipment::EquipmentToml::EQUIPMENT_TOML)
-    ).annotated().expect("TOML");
+    let actual = equipment::Rig::read(
+            test.fixture_dir().join(equipment::RigToml::RIG_TOML)
+        ).annotated().expect("TOML");
 
     assert_eq!(expected, actual);
 }

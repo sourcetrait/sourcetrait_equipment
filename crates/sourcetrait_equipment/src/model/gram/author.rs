@@ -7,9 +7,9 @@ pub struct Author {
     pub email: Email,
 }
 
-impl TryFrom<TomlAuthor> for Author {
+impl TryFrom<AuthorToml> for Author {
     type Error = EquipmentError;
-    fn try_from(v: TomlAuthor) -> EquipmentResult<Self> {
+    fn try_from(v: AuthorToml) -> EquipmentResult<Self> {
         Ok(Self {
             name: Key::try_from(v.key)?,
             title: Title::try_from(v.title)?,
