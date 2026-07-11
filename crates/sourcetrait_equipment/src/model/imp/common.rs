@@ -1,50 +1,67 @@
 use crate::*;
 
-pub trait RepositoryTrait: Clone + PartialEq {
-    fn kind(&self) -> RepositoryKind;
-    fn provider(&self) -> &Key;
-}
 
-impl Key {
-    pub(crate) const CHECK: StrCheck = StrCheck::DEFAULT
-        .case(StrCase::Snake)
-        .max_len(16);
-}
-
-impl From<&str> for Key { fn from(v: &str) -> Self { Self(v.to_string()) } }
-
-impl TryFrom<String> for BiKey {
+impl TryFrom<(&str,&str,&str)> for TriKey {
     type Error = EquipmentError;
-    fn try_from(v: String) -> EquipmentResult<Self> {
-        let (a,b) = v.split_once('/')
-            .map(|(a,b)| (a.to_string(), b.to_string()))
-            .ok_or_else(|| EquipmentError::String { str: v, err: StrErr::Path })?;
-        
-        Ok(Self(Key::try_from(a)?, Key::try_from(b)?))
+    fn try_from(v: (&str, &str, &str)) -> EquipmentResult<Self> {
+        Ok(Self(
+            Key::try_from(v.0.to_string())?,
+            Key::try_from(v.1.to_string())?,
+            Key::try_from(v.2.to_string())?,
+        ))
     }
 }
 
-impl From<(&str,&str)> for BiKey {
-    fn from(v: (&str, &str)) -> Self {
-        Self(
-            Key::try_from(v.0.to_string()).expect("valid"),
-            Key::try_from(v.1.to_string()).expect("valid")
-        )
+impl TryFrom<(&str,&str,&str,&str)> for QuadKey {
+    type Error = EquipmentError;
+    fn try_from(v: (&str, &str, &str, &str)) -> EquipmentResult<Self> {
+        Ok(Self(
+            Key::try_from(v.0.to_string())?,
+            Key::try_from(v.1.to_string())?,
+            Key::try_from(v.2.to_string())?,
+            Key::try_from(v.3.to_string())?,
+        ))
+    }
+}
+
+impl TryFrom<String> for TriKey {
+    type Error = EquipmentError;
+    fn try_from(v: String) -> EquipmentResult<Self> {
+        let [a,b,c] = v.split('/').collect::<Vec<_>>()[..] else {
+            return Err(EquipmentError::String { str: v, err: StrErr::Path });
+        };
+        
+        Ok(Self::try_from((a,b,c))?)
+    }
+}
+
+impl TryFrom<String> for QuadKey {
+    type Error = EquipmentError;
+    fn try_from(v: String) -> EquipmentResult<Self> {
+        let [a,b,c,d] = v.split('/').collect::<Vec<_>>()[..] else {
+            return Err(EquipmentError::String { str: v, err: StrErr::Path });
+        };
+        
+        Ok(Self::try_from((a,b,c,d))?)
+    }
+}
+
+impl TryFrom<String> for BagKey {
+    type Error = EquipmentError;
+    fn try_from(v: String) -> EquipmentResult<Self> {
+        match v.split('/').collect::<Vec<_>>()[..] {
+            [a,b,c,d] => Ok(Self::Quad(QuadKey::try_from((a,b,c,d))?)),
+            [a,b,c] => Ok(Self::Tri(TriKey::try_from((a,b,c))?)),
+            _ => Err(EquipmentError::String { str: v, err: StrErr::Path }),
+        }
     }
 }
 
 impl From<&str> for Title { fn from(v: &str) -> Self { Self(v.to_string()) } }
 
-impl From<&str> for Version {
-    fn from(v: &str) -> Self {
+impl From<&'static str> for Version {
+    fn from(v: &'static str) -> Self {
         Self(semver::Version::parse(v).expect("semver"))
-    }
-}
-
-impl TryFrom<String> for Key {
-    type Error = EquipmentError;
-    fn try_from(v: String) -> EquipmentResult<Self> {
-        Self::CHECK.valid(v).map(|v| Self(v))
     }
 }
 
@@ -55,7 +72,7 @@ impl Title {
 impl TryFrom<String> for Title {
     type Error = EquipmentError;
     fn try_from(v: String) -> EquipmentResult<Self> {
-        Self::CHECK.valid(v).map(|v| Self(v))
+        Self::CHECK.validate(v).map(|v| Self(v))
     }
 }
 
@@ -131,13 +148,13 @@ impl Summary {
 impl TryFrom<String> for Summary {
     type Error = EquipmentError;
     fn try_from(v: String) -> EquipmentResult<Self> {
-        Self::CHECK.valid(v).map(|v| Self(v))
+        Self::CHECK.validate(v).map(|v| Self(v))
     }
 }
 
 impl From<&str> for Summary {
     fn from(v: &str) -> Self {
-        Self::CHECK.valid(v.to_string()).map(|v| Self(v)).expect("valid")
+        Self::CHECK.validate(v.to_string()).map(|v| Self(v)).expect("valid")
     }
 }
 
@@ -150,13 +167,13 @@ impl Keyword {
 impl TryFrom<String> for Keyword {
     type Error = EquipmentError;
     fn try_from(v: String) -> EquipmentResult<Self> {
-        Self::CHECK.valid(v).map(|v| Self(v))
+        Self::CHECK.validate(v).map(|v| Self(v))
     }
 }
 
 impl From<&str> for Keyword {
     fn from(v: &str) -> Self {
-        Self::CHECK.valid(v.to_string()).map(|v| Self(v)).expect("valid")
+        Self::CHECK.validate(v.to_string()).map(|v| Self(v)).expect("valid")
     }
 }
 

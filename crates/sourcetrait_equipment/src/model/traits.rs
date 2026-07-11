@@ -1,16 +1,15 @@
 use crate::*;
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub struct Key(pub String);
+pub trait FromFixed<T>: Sized {
+    fn fixed(v: T) -> Self;
+}
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub struct BiKey(pub Key, pub Key);
+pub trait RepositoryTrait: Clone + PartialEq {
+    fn kind(&self) -> RepositoryKind;
+    fn provider(&self) -> &Key;
+}
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub struct TriKey(pub Key, pub Key, pub Key);
 
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub struct QuadKey(pub Key, pub Key, pub Key, pub Key);
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum BagKey {

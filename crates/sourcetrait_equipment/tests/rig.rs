@@ -14,7 +14,7 @@ fn test_read() {
     });
 
     let expected: equipment::Equipment = equipment::Equipment {
-        key: equipment::Key::from("empower"),
+        key: equipment::Key::fixed("empower"),
         title: equipment::Title::from("SourceTrait Empower"),
         version: equipment::Version::from("0.0.0-2"),
         repositories: equipment::Provider {

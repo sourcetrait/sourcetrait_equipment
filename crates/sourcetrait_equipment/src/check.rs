@@ -76,8 +76,8 @@ impl StrCheck {
         }
     }
 
-    pub fn valid(self, s: String) -> EquipmentResult<String> {
-        self.check(&s)?;
+    pub fn validate<S: AsRef<str>>(self, s: S) -> EquipmentResult<S> {
+        self.check(s.as_ref())?;
         Ok(s)
     }
 }

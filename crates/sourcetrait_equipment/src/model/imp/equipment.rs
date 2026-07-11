@@ -31,9 +31,15 @@ impl TryFrom<EquipmentExportsToml> for EquipmentExports {
     type Error = EquipmentError;
     fn try_from(v: EquipmentExportsToml) -> EquipmentResult<Self> {
         Ok(Self {
-            rig: v.libraries.into_iter()
+            rig: v.rig.into_iter()
                 .map(|s| BiKey::try_from(s))
-                .collect::<EquipmentResult<_>>()?
+                .collect::<EquipmentResult<_>>()?,
+            bag: v.bag.into_iter()
+                .map(|s| BagKey::try_from(s))
+                .collect::<EquipmentResult<_>>()?,
+            rig: v.rig.into_iter()
+                .map(|s| BiKey::try_from(s))
+                .collect::<EquipmentResult<_>>()?,
         })
     }
 }
