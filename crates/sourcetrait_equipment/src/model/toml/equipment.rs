@@ -6,13 +6,32 @@ pub struct EquipmentToml {
     pub title: String,
     pub version: String,
     pub author: AuthorToml,
-    pub provider: TomlProvider,
+    pub repositories: Vec<RepositorySetToml>,
     pub details: DetailsToml,
     pub license: LicenseToml,
     pub support: EquipmentSupportToml,
     pub exports: EquipmentExportsToml,
 }
 
+impl TryFrom<EquipmentToml> for Equipment {
+    type Error = EquipmentError;
+    fn try_from(v: EquipmentToml) -> EquipmentResult<Self> {
+        Ok(Self {
+            key: BiKey::try_from(v.key)?,
+            title: Title::try_from(v.title)?,
+            version: Version::try_from(v.version)?,
+            repositories: v.repositories.into_iter()
+                .map(|v| RepositorySet::try_from(v))
+                .collect()?,
+            author: Author::try_from(v.author)?,
+            details: Details::try_from(v.details)?,
+            license: License::try_from(v.license)?,
+            support: EquipmentSupport::try_from(v.support)?,
+            imports: EquipmentImports::try_from(v.imports)?,
+            exports: EquipmentExports::try_from(v.exports)?,
+        })
+    }
+}
 
 impl EquipmentToml {
     pub const EQUIPMENT_TOML: &'static str = "equipment.toml";

@@ -1,7 +1,5 @@
 use crate::*;
 
-
-
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct TomlProvider {
     pub key: String,
@@ -18,9 +16,5 @@ pub struct TomlProviderMirror {
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct TomlProviderContribute {
     pub uri: String,
-}
-#[derive(Debug, serde::Serialize, serde::Deserialize)]
-pub struct TomlSupportVersionReq {
-    pub version: String,
 }
 

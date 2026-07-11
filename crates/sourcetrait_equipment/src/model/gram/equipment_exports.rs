@@ -6,6 +6,6 @@ pub struct EquipmentExports {
     pub gear_box: Vec<BiKey>,
     pub gear_desk: Vec<BiKey>,
     pub gear_lib: Vec<BiKey>,
-    pub bag: Vec<TriKey>,
+    pub bag: Vec<BagKey>,
 }
 

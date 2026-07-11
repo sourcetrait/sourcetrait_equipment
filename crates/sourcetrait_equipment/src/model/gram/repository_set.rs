@@ -11,4 +11,5 @@ pub struct GenericRepositorySet<REPO: RepositoryTrait> {
 #[derive(Debug, Clone, PartialEq)]
 pub enum RepositorySet {
     Git(GenericRepositorySet<GitRepository>),
+    Ipfs(GenericRepositorySet<IpfsRepository>),
 }

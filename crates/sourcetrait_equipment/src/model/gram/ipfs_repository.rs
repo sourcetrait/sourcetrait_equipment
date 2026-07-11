@@ -6,3 +6,8 @@ pub struct IpfsRepository {
     pub ipns: IpnsName,
     pub cid: IpfsCid,
 }
+
+impl RepositoryTrait for IpfsRepository {
+    fn kind(&self) -> RepositoryKind { RepositoryKind::Ipfs }
+    fn provider(&self) -> &Key { &self.provider }
+}

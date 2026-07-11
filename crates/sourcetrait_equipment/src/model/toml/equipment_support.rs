@@ -2,8 +2,8 @@ use crate::*;
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct EquipmentSupportToml {
-    pub nushell: TomlSupportVersionReq,
-    pub equipment: TomlSupportVersionReq,
+    pub nushell: VersionSupportToml,
+    pub equipment: VersionSupportToml,
 }
 
 impl TryFrom<EquipmentSupportToml> for EquipmentSupport {

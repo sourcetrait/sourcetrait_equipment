@@ -49,11 +49,14 @@ pub(crate) mod model {
         pub(crate) mod equipment;
         pub(crate) mod equipment_exports;
         pub(crate) mod equipment_support;
+        pub(crate) mod git_repository;
+        pub(crate) mod ipfs_repository;
         pub(crate) mod license;
         pub(crate) mod repository_set;
         pub(crate) mod rig;
         pub(crate) mod rig_import;
         pub(crate) mod rig_imports;
+        pub(crate) mod version_support;
     }
     pub(crate) mod traits;
 }
@@ -82,7 +85,7 @@ pub use crate::{
             quad_key::QuadKey,
             repository::Repository,
             repository_kind::RepositoryKind,
-            repository_set::RepositorySet,
+            repository_set::{GenericRepositorySet, RepositorySet},
             rig::Rig,
             rig_import::RigImport,
             rig_imports::RigImports,
@@ -99,10 +102,14 @@ pub use crate::{
             equipment::EquipmentToml,
             equipment_exports::EquipmentExportsToml,
             equipment_support::EquipmentSupportToml,
+            git_repository::GitRepositoryToml,
+            ipfs_repository::IpfsRepositoryToml,
             license::LicenseToml,
+            repository_set::{RepositorySetToml, GenericRepositorySetToml},
             rig::RigToml,
             rig_import::RigImportToml,
             rig_imports::RigImportsToml,
+            version_support::VersionSupportToml,
         },
         traits::{FromFixed, RepositoryTrait},
     },

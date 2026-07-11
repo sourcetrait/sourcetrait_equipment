@@ -30,27 +30,6 @@ impl TryFrom<TomlProviderContribute> for ProviderContribute {
     }
 }
 
-impl TryFrom<DetailsToml> for Details {
-    type Error = EquipmentError;
-    fn try_from(v: DetailsToml) -> EquipmentResult<Self> {
-        Ok(Self {
-            summary: Summary::try_from(v.summary)?,
-            keywords: v.keywords.into_iter()
-                .map(|k| Keyword::try_from(k))
-                .collect::<EquipmentResult<_>>()?,
-        })
-    }
-}
-
-impl TryFrom<LicenseToml> for License {
-    type Error = EquipmentError;
-    fn try_from(v: LicenseToml) -> EquipmentResult<Self> {
-        Ok(Self {
-            spdx: v.spdx.map(|v| Spdx::try_from(v)).transpose()?,
-            file: v.file,
-        })
-    }
-}
 
 impl TryFrom<TomlSupportVersionReq> for VersionReq {
     type Error = EquipmentError;
