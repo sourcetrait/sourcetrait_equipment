@@ -59,7 +59,7 @@ fn test_read() {
     };
     
     let actual = equipment::Equipment::read(
-        test.fixture_dir().join(equipment::EquipmentToml::RIG_TOML)
+        test.fixture_dir().join(equipment::EquipmentToml::EQUIPMENT_TOML)
     ).annotated().expect("TOML");
 
     assert_eq!(expected, actual);

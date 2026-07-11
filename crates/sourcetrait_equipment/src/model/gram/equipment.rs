@@ -14,3 +14,8 @@ pub struct Equipment {
     pub imports: EquipmentImports,
 }
 
+impl Equipment {
+    pub fn read_toml<P: AsRef<Path> + Into<PathBuf>>(path: P) -> EquipmentResult<Self> {
+        Self::try_from(EquipmentToml::read(path)?)
+    }
+}

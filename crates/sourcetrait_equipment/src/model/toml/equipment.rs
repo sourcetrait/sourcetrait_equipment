@@ -29,20 +29,17 @@ pub struct EquipmentTomlSupport {
 }
 
 impl EquipmentToml {
-    pub const RIG_TOML: &'static str = "rig.toml";
+    pub const EQUIPMENT_TOML: &'static str = "equipment.toml";
     
     pub fn read<P: AsRef<Path> + Into<PathBuf>>(path: P) -> EquipmentResult<Self> {
-        let path = if path.as_ref().is_dir() {
-            path.as_ref().join(Self::RIG_TOML)
-        } else {
-            path.into()
+        let path = match path.as_ref().is_dir() {
+            true => path.as_ref().join(Self::EQUIPMENT_TOML),
+            false => path.into(),
         };
         
         let txt = fs::read_to_string(&path)
             .map_err(|source| EquipmentError::File { source, path: path.to_path_buf(), op: IoErr::Read })?;
-        let rig = toml::from_str(&txt)
-            .map_err(|source| EquipmentError::TomlFileRead { source, path: path.to_path_buf() })?;
-        
-        Ok(rig)
+        toml::from_str(&txt)
+            .map_err(|source| EquipmentError::TomlFileRead { source, path: path.to_path_buf() })
     }
 }

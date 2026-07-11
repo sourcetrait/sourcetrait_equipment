@@ -40,8 +40,3 @@ impl TryFrom<LibraryTomlImport> for RigImport {
     }
 }
 
-impl Rig {
-    pub fn read<P: AsRef<Path> + Into<PathBuf>>(path: P) -> EquipmentResult<Self> {
-        Self::try_from(LibraryToml::read(path)?)
-    }
-}

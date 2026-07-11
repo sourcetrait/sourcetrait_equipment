@@ -44,8 +44,3 @@ impl TryFrom<EquipmentExportsToml> for EquipmentExports {
     }
 }
 
-impl Equipment {
-    pub fn read<P: AsRef<Path> + Into<PathBuf>>(path: P) -> EquipmentResult<Self> {
-        Self::try_from(EquipmentToml::read(path)?)
-    }
-}

@@ -21,6 +21,7 @@ pub(crate) mod model {
         pub(crate) mod ipfs_repository;
         pub(crate) mod ipns_name;
         pub(crate) mod key;
+        pub(crate) mod keyword;
         pub(crate) mod license;
         pub(crate) mod quad_key;
         pub(crate) mod repository;
@@ -55,22 +56,39 @@ pub(crate) mod model {
 pub use crate::{
     model::{
         gram::{
-            key::Key,
+            author::Author,
+            bag_key::BagKey,
             bi_key::BiKey,
+            details::Details,
+            email::Email,
             equipment::Equipment,
             equipment_exports::EquipmentExports,
             equipment_imports::EquipmentImports,
             equipment_support::EquipmentSupport,
+            git_reference::GitReference,
+            git_repository::GitRepository,
+            git_uri::GitUri,
+            ipfs_cid::IpfsCid,
+            ipfs_repository::IpfsRepository,
+            ipns_name::IpnsName,
+            key::Key,
+            keyword::Keyword,
+            license::License,
+            quad_key::QuadKey,
+            repository::Repository,
+            repository_kind::RepositoryKind,
+            repository_set::RepositorySet,
             rig::Rig,
             rig_import::RigImport,
             rig_imports::RigImports,
+            spdx::Spdx,
+            summary::Summary,
+            title::Title,
+            tri_key::TriKey,
+            version::Version,
+            version_req::VersionReq,
         },
-        traits::{
-            FromFixed, RepositoryTrait,
-            TriKey, QuadKey, BagKey, Title, Details, License, Author, Version,
-            Email, Summary, Keyword, Spdx, RepositoryKind, GenericRepositorySet,
-            VersionReq, GitReference, GitUri, RepositorySet, GitRepository,
-        },
+        traits::{FromFixed, RepositoryTrait},
         toml::{
             common::{
                 TomlAuthor, TomlProvider, TomlDetails, TomlLicense,
