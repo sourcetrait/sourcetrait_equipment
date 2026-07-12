@@ -1,7 +1,7 @@
 use crate::*;
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
-pub struct GenericRepositorySetToml<REPO> {
+pub struct RepositorySetToml<REPO> {
     pub key: String,
     pub read: Option<REPO>,
     pub write: Option<REPO>,
@@ -10,17 +10,17 @@ pub struct GenericRepositorySetToml<REPO> {
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
 #[serde(tag = "kind")]
-pub enum RepositorySetToml {
-    Git(GenericRepositorySetToml<GitRepositoryToml>),
-    Ipfs(GenericRepositorySetToml<IpfsRepositoryToml>),
+pub enum RepositorySetEnumToml {
+    Git(RepositorySetToml<GitRepositoryToml>),
+    Ipfs(RepositorySetToml<IpfsRepositoryToml>),
 }
 
-impl<TOML, GRAM> TryFrom<GenericRepositorySetToml<TOML>> for GenericRepositorySet<GRAM>
+impl<TOML, GRAM> TryFrom<RepositorySetToml<TOML>> for RepositorySet<GRAM>
 where
     GRAM: RepositoryTrait + TryFrom<TOML, Error = EquipmentError>,
 {
     type Error = EquipmentError;
-    fn try_from(v: GenericRepositorySetToml<TOML>) -> EquipmentResult<Self> {
+    fn try_from(v: RepositorySetToml<TOML>) -> EquipmentResult<Self> {
         Ok(Self {
             key: TriKey::try_from(v.key)?,
             read: v.read.map(|r| GRAM::try_from(r)).transpose()?,
@@ -30,14 +30,14 @@ where
     }
 }
 
-impl TryFrom<RepositorySetToml> for RepositorySet {
+impl TryFrom<RepositorySetEnumToml> for RepositorySetEnum {
     type Error = EquipmentError;
-    fn try_from(v: RepositorySetToml) -> EquipmentResult<Self> {
+    fn try_from(v: RepositorySetEnumToml) -> EquipmentResult<Self> {
         match v {
-            RepositorySetToml::Git(repo) => 
-                Ok(RepositorySet::Git(GenericRepositorySet::try_from(repo)?)),
-            RepositorySetToml::Ipfs(repo) =>
-                Ok(RepositorySet::Ipfs(GenericRepositorySet::try_from(repo)?)),
+            RepositorySetEnumToml::Git(repo) =>
+                Ok(Self::Git(RepositorySet::try_from(repo)?)),
+            RepositorySetEnumToml::Ipfs(repo) =>
+                Ok(Self::Ipfs(RepositorySet::try_from(repo)?)),
         }
     }
 }

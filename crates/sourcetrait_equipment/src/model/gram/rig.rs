@@ -8,7 +8,7 @@ pub struct Rig {
     pub author: Author,
     pub details: Details,
     pub license: License,
-    pub imports: RigImports,
+    pub imports: Vec<ImportEnum>,
 }
 
 impl Rig {

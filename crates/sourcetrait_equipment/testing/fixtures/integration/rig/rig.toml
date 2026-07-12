@@ -15,3 +15,17 @@ email = "development@sourcetrait.com"
 spdx = "AGPL-3.0-or-later"
 file = "LICENSE-AGPL-3.txt"
 
+[[import.rig]]
+key = "sourcetrait/equipment"
+repository = "git/sourcetrait/equipment"
+version = "0"
+
+[[import.gear.box]]
+key = "sourcetrait/eqp"
+repository = "git/sourcetrait/equipment"
+version = "0"
+
+[[import.bag]]
+key = "sourcetrait/olmo/docq"
+repository = "ipfs/sourcetrait/equipment"
+version = "0"

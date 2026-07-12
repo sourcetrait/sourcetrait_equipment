@@ -1,7 +1,7 @@
 use crate::*;
 
 #[derive(Debug, Clone, PartialEq)]
-pub struct GenericRepositorySet<REPO: RepositoryTrait> {
+pub struct RepositorySet<REPO: RepositoryTrait> {
     pub key: TriKey,
     pub read: Option<REPO>,
     pub write: Option<REPO>,
@@ -9,7 +9,19 @@ pub struct GenericRepositorySet<REPO: RepositoryTrait> {
 }
 
 #[derive(Debug, Clone, PartialEq)]
-pub enum RepositorySet {
-    Git(GenericRepositorySet<GitRepository>),
-    Ipfs(GenericRepositorySet<IpfsRepository>),
+pub enum RepositorySetEnum {
+    Git(RepositorySet<GitRepository>),
+    Ipfs(RepositorySet<IpfsRepository>),
+}
+
+impl From<RepositorySet<GitRepository>> for RepositorySetEnum {
+    fn from(v: RepositorySet<GitRepository>) -> Self {
+        Self::Git(v)
+    }
+}
+
+impl From<RepositorySet<IpfsRepository>> for RepositorySetEnum {
+    fn from(v: RepositorySet<IpfsRepository>) -> Self {
+        Self::Ipfs(v)
+    }
 }

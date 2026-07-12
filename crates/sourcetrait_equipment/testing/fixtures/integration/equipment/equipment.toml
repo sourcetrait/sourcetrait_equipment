@@ -19,9 +19,8 @@ file = "LICENSE-AGPL-3.txt"
 nushell.version = "0.113"
 equipment.version = "0"
 
-[[repository]]
+[[repository.git]]
 key = "git/sourcetrait/empower"
-kind = "git"
 read.provider = "github"
 read.uri = "https://github.com/sourcetrait/empower_equipment.git"
 read.reference = "draft/roylaurie"
@@ -52,9 +51,8 @@ bag = [
     "sourcetrait/empower/role"
 ]
 
-[[import.repository]]
+[[import.repository.git]]
 key = "git/sourcetrait/equipment"
-kind = "git"
 read.provider = "github"
 read.uri = "https://github.com/sourcetrait/equipment_equipment.git"
 read.reference = "v0.0.1"
@@ -62,21 +60,8 @@ write.provider = "github"
 write.uri = "ssh://git@github.com:sourcetrait/equipment_equipment.git"
 write.reference = "dev"
 
-[[import.repository]]
+[[import.repository.ipfs]]
 key = "ipfs/sourcetrait/equipment"
-kind = "ipfs"
 store.provider = "sourcetrait"
 store.ipns = "k51qzi5uqu5dkdbnmhuz1ksriva06ulvmaf3bu8ig8sm7vu3dvzt1gkda0sjee"
 store.cid = "bafkreigh6aess6gkvwadzqlfkxxeyzfofn67g63dkbtruy3ffyl7p65opa"
-
-[[import.gear]]
-key = "sourcetrait/eqp"
-version = "0"
-repository = "git/sourcetrait/equipment"
-
-[[import.bag]]
-key = "sourcetrait/olmo/docq"
-repository = "ipfs/sourcetrait/equipment"
-version = "0"
-
-

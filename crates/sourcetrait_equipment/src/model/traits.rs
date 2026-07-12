@@ -6,5 +6,4 @@ pub trait FromFixed<T>: Sized {
 
 pub trait RepositoryTrait: Clone + PartialEq {
     fn kind(&self) -> RepositoryKind;
-    fn provider(&self) -> &Key;
 }

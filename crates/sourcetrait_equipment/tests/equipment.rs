@@ -17,18 +17,20 @@ fn test_read() {
         key: equipment::BiKey::fixed("empower"),
         title: equipment::Title::from("SourceTrait Empower"),
         version: equipment::Version::from("0.0.0-2"),
-        repositories: equipment::Provider {
-            key: equipment::BiKey::from(("github", "sourcetrait")),
-            reference: equipment::GitReference::from("dev"),
-            mirror: equipment::ProviderMirror {
-                uri: equipment::GitUri::from("https://github.com/sourcetrait"),
-            },
-            contribute: equipment::ProviderContribute {
-                uri: equipment::GitUri::from("ssh://git@github.com/sourcetrait"),
-            },
-        },
+        repositories: Vec::from([
+            equipment::RepositorySet {
+                key: equipment::BiKey::from(("git", "sourcetrait", "empower")),
+                read: Some(equipment::GitRepository {
+                    uri: equipment::GitUri::from("https://github.com/sourcetrait/empower.git"),
+                }),
+                write: Some(equipment::GitRepository {
+                    uri: equipment::GitUri::from("ssh://git@github.com/sourcetrait/empower.git"),
+                }),
+                store: None,
+            }.into(),
+        ]),
         author: equipment::Author {
-            name: equipment::BiKey::from("sourcetrait"),
+            name: equipment::Key::fixed("sourcetrait"),
             title: equipment::Title::from("SourceTrait"),
             email: equipment::Email::from("development@sourcetrait.com"),
         },
@@ -42,16 +44,14 @@ fn test_read() {
             spdx: Some(equipment::Spdx::from("AGPL-3.0-or-later")),
             file: PathBuf::from("LICENSE-AGPL-3.txt"),
         },
-        exports: equipment::EquipmentExports {
-            rig: Vec::from([
-                equipment::BiKey::from(("sourcetrait", "ant")),
-                equipment::BiKey::from(("sourcetrait", "drone")),
-                equipment::BiKey::from(("sourcetrait", "equip")),
-                equipment::BiKey::from(("sourcetrait", "empower")),
-                equipment::BiKey::from(("sourcetrait", "fae")),
-                equipment::BiKey::from(("sourcetrait", "queen")),
-            ]),
-        },
+        exports: Vec::from([
+            equipment::RigExport(equipment::BiKey::from(("sourcetrait", "ant")).into(),
+            equipment::RigExport(equipment::BiKey::from(("sourcetrait", "drone"))).into(),
+            equipment::RigExport(equipment::BiKey::from(("sourcetrait", "equip"))),
+            equipment::RigExport(equipment::BiKey::from(("sourcetrait", "empower"))),
+            equipment::RigExport(equipment::BiKey::from(("sourcetrait", "fae"))),
+            equipment::RigExport(equipment::BiKey::from(("sourcetrait", "queen"))),
+        ]),
         support: equipment::EquipmentSupport {
             nushell: equipment::SupportVersionReq::from("0.113"),
             equipment: equipment::SupportVersionReq::from("0"),

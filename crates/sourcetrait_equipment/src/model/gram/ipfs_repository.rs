@@ -9,5 +9,4 @@ pub struct IpfsRepository {
 
 impl RepositoryTrait for IpfsRepository {
     fn kind(&self) -> RepositoryKind { RepositoryKind::Ipfs }
-    fn provider(&self) -> &Key { &self.provider }
 }

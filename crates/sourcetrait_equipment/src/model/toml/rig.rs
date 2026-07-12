@@ -8,7 +8,8 @@ pub struct RigToml {
     pub version: String,
     pub details: DetailsToml,
     pub license: LicenseToml,
-    pub imports: RigImportsToml,
+    #[serde(alias = "import")]
+    pub imports: ImportsToml,
 }
 
 impl TryFrom<RigToml> for Rig {
@@ -22,7 +23,7 @@ impl TryFrom<RigToml> for Rig {
             author: Author::try_from(v.author)?,
             details: Details::try_from(v.details)?,
             license: License::try_from(v.license)?, 
-            imports: RigImports::try_from(v.imports)?,
+            imports: v.imports.try_into()?,
         })
     }
 }

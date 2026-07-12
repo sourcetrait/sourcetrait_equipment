@@ -11,7 +11,7 @@ pub(crate) mod model {
         pub(crate) mod details;
         pub(crate) mod email;
         pub(crate) mod equipment;
-        pub(crate) mod equipment_exports;
+        pub(crate) mod export;
         pub(crate) mod equipment_imports;
         pub(crate) mod equipment_support;
         pub(crate) mod git_reference;
@@ -27,8 +27,7 @@ pub(crate) mod model {
         pub(crate) mod repository;
         pub(crate) mod repository_kind;
         pub(crate) mod repository_set;
-        pub(crate) mod rig_import;
-        pub(crate) mod rig_imports;
+        pub(crate) mod import;
         pub(crate) mod rig;
         pub(crate) mod spdx;
         pub(crate) mod summary;
@@ -36,11 +35,6 @@ pub(crate) mod model {
         pub(crate) mod tri_key;
         pub(crate) mod version;
         pub(crate) mod version_req;
-    }
-    pub(crate) mod imp {
-        pub(crate) mod common;
-        pub(crate) mod rig;
-        pub(crate) mod equipment;
     }
     pub(crate) mod toml {
         pub(crate) mod author;
@@ -54,8 +48,8 @@ pub(crate) mod model {
         pub(crate) mod license;
         pub(crate) mod repository_set;
         pub(crate) mod rig;
-        pub(crate) mod rig_import;
-        pub(crate) mod rig_imports;
+        pub(crate) mod import;
+        pub(crate) mod imports;
         pub(crate) mod version_support;
     }
     pub(crate) mod traits;
@@ -70,7 +64,7 @@ pub use crate::{
             details::Details,
             email::Email,
             equipment::Equipment,
-            equipment_exports::EquipmentExports,
+            export::{ExportEnum, RigExport, BagExport, GearBoxExport, GearDeskExport, GearLibExport},
             equipment_imports::EquipmentImports,
             equipment_support::EquipmentSupport,
             git_reference::GitReference,
@@ -83,12 +77,11 @@ pub use crate::{
             keyword::Keyword,
             license::License,
             quad_key::QuadKey,
-            repository::Repository,
+            repository::RepositoryEnum,
             repository_kind::RepositoryKind,
-            repository_set::{GenericRepositorySet, RepositorySet},
+            repository_set::{RepositorySet, RepositorySetEnum},
             rig::Rig,
-            rig_import::RigImport,
-            rig_imports::RigImports,
+            import::{ImportEnum, RigImport, BagImport, GearBoxImport, GearDeskImport, GearLibImport},
             spdx::Spdx,
             summary::Summary,
             title::Title,
@@ -105,10 +98,10 @@ pub use crate::{
             git_repository::GitRepositoryToml,
             ipfs_repository::IpfsRepositoryToml,
             license::LicenseToml,
-            repository_set::{RepositorySetToml, GenericRepositorySetToml},
+            repository_set::{RepositorySetToml, RepositorySetEnumToml},
             rig::RigToml,
-            rig_import::RigImportToml,
-            rig_imports::RigImportsToml,
+            import::{RigImportToml, GearBoxImportToml, GearDeskImportToml, GearLibImportToml, BagImportToml},
+            imports::{ImportsToml, GearImportsToml},
             version_support::VersionSupportToml,
         },
         traits::{FromFixed, RepositoryTrait},

@@ -7,7 +7,7 @@ impl TryFrom<String> for BiKey {
     type Error = EquipmentError;
     fn try_from(v: String) -> EquipmentResult<Self> {
         v.split_once('/')
-            .ok_or_else(|| EquipmentError::String { str: v, err: StrErr::Path })
+            .ok_or_else(|| EquipmentError::String { str: v.to_string(), err: StrErr::Path })
             .map(|(a,b)| Ok(Self(Key::try_from(a)?, Key::try_from(b)?)))?
     }
 }

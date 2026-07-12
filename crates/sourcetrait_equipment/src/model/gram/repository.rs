@@ -1,7 +1,7 @@
 use crate::*;
 
 #[derive(Debug, Clone, PartialEq)]
-pub enum Repository {
+pub enum RepositoryEnum {
     Git(GitRepository),
     Ipfs(IpfsRepository),
 }

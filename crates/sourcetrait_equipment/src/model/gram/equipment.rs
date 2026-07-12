@@ -9,9 +9,8 @@ pub struct Equipment {
     pub details: Details,
     pub license: License,
     pub support: EquipmentSupport,
-    pub repositories: Vec<RepositorySet>,
-    pub exports: EquipmentExports,
-    pub imports: EquipmentImports,
+    pub repositories: Vec<RepositorySetEnum>,
+    pub exports: Vec<ExportEnum>,
 }
 
 impl Equipment {
