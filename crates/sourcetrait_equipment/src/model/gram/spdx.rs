@@ -12,8 +12,8 @@ impl TryFrom<String> for Spdx {
     }
 }
 
-impl From<&str> for Spdx {
-    fn from(spdx: &str) -> Self {
+impl FromFixed<&'static str> for Spdx {
+    fn fixed(spdx: &'static str) -> Self {
         spdx::Expression::parse(&spdx)
             .map(|v| Self(v))
             .expect("valid")

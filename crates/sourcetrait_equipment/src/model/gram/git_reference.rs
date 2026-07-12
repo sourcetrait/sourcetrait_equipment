@@ -15,3 +15,9 @@ impl From<&str> for GitReference {
         Self::try_from(v.to_string()).expect("valid")
     }
 }
+
+impl FromFixed<&'static str> for GitReference {
+    fn fixed(v: &'static str) -> Self {
+        Self::try_from(v).expect("valid")
+    }
+}

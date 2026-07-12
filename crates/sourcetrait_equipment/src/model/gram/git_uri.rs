@@ -25,8 +25,8 @@ impl TryFrom<String> for GitUri {
     }
 }
 
-impl From<&str> for GitUri {
-    fn from(v: &str) -> Self {
+impl FromFixed<&'static str> for GitUri {
+    fn fixed(v: &str) -> Self {
         Self::try_from(v.to_string()).expect("valid")
     }
 }

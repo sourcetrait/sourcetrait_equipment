@@ -31,21 +31,21 @@ impl Email {
         Ok(())
     }
 
-    pub(crate) fn valid(s: String) -> EquipmentResult<Self> {
-        Self::check(&s)?;
-        Ok(Self(s))
+    pub(crate) fn validate<S: Into<String> + AsRef<str>>(s: S) -> EquipmentResult<Self> {
+        Self::check(s.as_ref())?;
+        Ok(Self(s.into()))
     }
 }
 
 impl TryFrom<String> for Email {
     type Error = EquipmentError;
     fn try_from(v: String) -> EquipmentResult<Self> {
-        Self::valid(v)
+        Self::validate(v)
     }
 }
 
-impl From<&str> for Email {
-    fn from(v: &str) -> Self {
-        Self::try_from(v.to_string()).expect("valid email")
+impl FromFixed<&'static str> for Email {
+    fn fixed(v: &'static str) -> Self {
+        Self::validate(v).expect("valid")
     }
 }

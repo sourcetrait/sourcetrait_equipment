@@ -115,7 +115,9 @@ pub use generated::ai::{
 };
 
 pub mod prelude {
-    pub use crate::AnnotatedResult;
+    pub use crate::{
+        AnnotatedResult, FromFixed,
+    };
 }
 
 pub(crate) use generated::ai::{

@@ -8,21 +8,21 @@ pub trait ImportTrait<KEY: Sized>: Sized {
 #[derive(Debug, Clone, PartialEq)]
 pub struct RigImport {
     pub key: BiKey,
-    pub repository: Key,
+    pub repository: TriKey,
     pub version: VersionReq,
 }
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct GearBoxImport {
     pub key: BiKey,
-    pub repository: Key,
+    pub repository: TriKey,
     pub version: VersionReq,
 }
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct GearDeskImport {
     pub key: BiKey,
-    pub repository: Key,
+    pub repository: TriKey,
     pub version: VersionReq,
 }
 
@@ -47,4 +47,20 @@ pub enum ImportEnum {
     GearDesk(GearDeskImport),
     GearLib(GearLibImport),
     Bag(BagImport),
+}
+
+impl From<RigImport> for ImportEnum {
+    fn from(v: RigImport) -> Self { Self::Rig(v) }
+}
+impl From<GearBoxImport> for ImportEnum {
+    fn from(v: GearBoxImport) -> Self { Self::GearBox(v) }
+}
+impl From<GearDeskImport> for ImportEnum {
+    fn from(v: GearDeskImport) -> Self { Self::GearDesk(v) }
+}
+impl From<GearLibImport> for ImportEnum {
+    fn from(v: GearLibImport) -> Self { Self::GearLib(v) }
+}
+impl From<BagImport> for ImportEnum {
+    fn from(v: BagImport) -> Self { Self::Bag(v) }
 }

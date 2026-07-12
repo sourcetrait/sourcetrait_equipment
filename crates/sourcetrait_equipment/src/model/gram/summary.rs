@@ -14,8 +14,8 @@ impl TryFrom<String> for Summary {
     }
 }
 
-impl From<&str> for Summary {
-    fn from(v: &str) -> Self {
-        Self::CHECK.validate(v.to_string()).map(|v| Self(v)).expect("valid")
+impl FromFixed<&'static str> for Summary {
+    fn fixed(v: &'static str) -> Self {
+        Self::CHECK.validate(v).map(|v| Self(v.into())).expect("valid")
     }
 }

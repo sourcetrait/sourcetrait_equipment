@@ -14,32 +14,34 @@ fn test_read() {
     });
 
     let expected: equipment::Rig = equipment::Rig {
-        key: equipment::BiKey::fixed("empower"),
-        title: equipment::Title::from("SourceTrait Empower"),
-        version: equipment::Version::from("0.0.0-4"),
+        key: equipment::BiKey::fixed(("sourcetrait", "empower")),
+        title: equipment::Title::fixed("SourceTrait Empower"),
+        version: equipment::Version::fixed((0,0,0, 4)),
         author: equipment::Author {
-            name: equipment::BiKey::fixed("sourcetrait"),
-            title: equipment::Title::from("SourceTrait"),
-            email: equipment::Email::from("development@sourcetrait.com"),
+            name: equipment::Key::fixed("sourcetrait"),
+            title: equipment::Title::fixed("SourceTrait"),
+            email: equipment::Email::fixed("development@sourcetrait.com"),
         },
         details: equipment::Details {
-            summary: equipment::Summary::from("Empower platform library"),
+            summary: equipment::Summary::fixed("Empower platform library"),
             keywords: Vec::from([
-                equipment::Keyword::from("ai"),
+                equipment::Keyword::fixed("ai"),
             ]),
         },
         license: equipment::License {
-            spdx: Some(equipment::Spdx::from("AGPL-3.0-or-later")),
+            spdx: Some(equipment::Spdx::fixed("AGPL-3.0-or-later")),
             file: PathBuf::from("LICENSE-AGPL-3.txt"),
         },
-        imports: equipment::RigImports {
-            libraries: Vec::from([
-                equipment::BiKey::from(("sourcetrait", "equipment"))
-            ]),
-        },
+        imports: Vec::from([
+            equipment::RigImport {
+                key: equipment::BiKey::fixed(("sourcetrait", "equipment")),
+                repository: equipment::TriKey::fixed(("git", "sourcetrait", "equipment")),
+                version: equipment::VersionReq::fixed("0"),
+            }.into(),
+        ]),
     };
     
-    let actual = equipment::Rig::read(
+    let actual = equipment::Rig::read_toml(
             test.fixture_dir().join(equipment::RigToml::RIG_TOML)
         ).annotated().expect("TOML");
 

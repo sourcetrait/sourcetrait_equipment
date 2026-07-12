@@ -24,3 +24,10 @@ impl TryFrom<(&str,&str,&str)> for TriKey {
         ))
     }
 }
+
+impl FromFixed<(&'static str, &'static str, &'static str)> for TriKey {
+    fn fixed(v: (&'static str, &'static str, &'static str)) -> Self {
+        Self::try_from((v.0, v.1, v.2)).expect("valid")
+    }
+}
+

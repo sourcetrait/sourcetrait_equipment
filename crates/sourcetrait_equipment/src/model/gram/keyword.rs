@@ -16,8 +16,8 @@ impl TryFrom<String> for Keyword {
     }
 }
 
-impl From<&str> for Keyword {
-    fn from(v: &str) -> Self {
-        Self::CHECK.validate(v.to_string()).map(|v| Self(v)).expect("valid")
+impl FromFixed<&'static str> for Keyword {
+    fn fixed(v: &'static str) -> Self {
+        Self::CHECK.validate(v).map(|v| Self(v.into())).expect("valid")
     }
 }

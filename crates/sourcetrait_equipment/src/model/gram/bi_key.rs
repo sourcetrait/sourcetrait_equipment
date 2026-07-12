@@ -24,3 +24,4 @@ impl FromFixed<(&'static str, &'static str)> for BiKey {
         Self::try_from((v.0, v.1)).expect("valid")
     }
 }
+

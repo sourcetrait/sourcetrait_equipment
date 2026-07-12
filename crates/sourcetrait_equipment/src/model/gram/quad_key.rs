@@ -25,3 +25,9 @@ impl TryFrom<(&str,&str,&str,&str)> for QuadKey {
         ))
     }
 }
+
+impl FromFixed<(&'static str, &'static str, &'static str, &'static str)> for QuadKey {
+    fn fixed(v: (&'static str, &'static str, &'static str, &'static str)) -> Self {
+        Self::try_from((v.0, v.1, v.2, v.3)).expect("valid")
+    }
+}
